@@ -16,7 +16,7 @@ export function ResultSummary({ result, averageResult }: ResultSummaryProps) {
   return (
     <section className={`panel result-panel tone-${result.rarityTone}`} aria-label="推定結果">
       <div className="result-topline">
-        <span>{result.enabledConditionCount}条件で推定</span>
+        <span>フェルミ推定: {result.enabledConditionCount}条件を乗算</span>
         <strong>{result.rarityLabel}</strong>
       </div>
 
