@@ -79,6 +79,7 @@ src/
   data/
 docs/
   assumptions.md
+  data-sources.md
   experiments.md
 ```
 
