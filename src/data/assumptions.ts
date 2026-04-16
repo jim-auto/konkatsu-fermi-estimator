@@ -104,7 +104,10 @@ export const cupSizeOptions: RatioOption<CupSizeId>[] = [
   { id: 'aToB', label: 'A-Bカップ', ratio: 0.42, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
   { id: 'c', label: 'Cカップ', ratio: 0.24, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
   { id: 'd', label: 'Dカップ', ratio: 0.18, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
-  { id: 'eOrMore', label: 'Eカップ以上', ratio: 0.16, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
+  { id: 'e', label: 'Eカップ', ratio: 0.09, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
+  { id: 'f', label: 'Fカップ', ratio: 0.04, note: 'Eカップ以上の層をさらに分割した仮定。' },
+  { id: 'g', label: 'Gカップ', ratio: 0.02, note: 'Eカップ以上の層をさらに分割した仮定。' },
+  { id: 'hOrMore', label: 'Hカップ以上', ratio: 0.01, note: 'かなり希少な自己申告条件として扱う。' },
 ];
 
 export const femaleEducationOptions: RatioOption<FemaleEducationId>[] = [
