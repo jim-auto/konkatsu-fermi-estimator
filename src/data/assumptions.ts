@@ -83,8 +83,8 @@ export const appearanceOptions: RatioOption<AppearanceId>[] = [
   { id: 'score50', label: '外見偏差値50以上', ratio: 0.5, note: '主観評価を偏差値風に換算。正規分布なら上位50%。' },
   { id: 'score55', label: '外見偏差値55以上', ratio: 0.31, note: '主観評価を偏差値風に換算。正規分布なら上位約31%。' },
   { id: 'score60', label: '外見偏差値60以上', ratio: 0.16, note: '主観評価を偏差値風に換算。正規分布なら上位約16%。' },
-  { id: 'score63', label: '外見偏差値63以上', ratio: 0.1, note: '主観評価を偏差値風に換算。正規分布なら上位約10%。' },
-  { id: 'score67', label: '外見偏差値67以上', ratio: 0.05, note: '主観評価を偏差値風に換算。正規分布なら上位約5%。' },
+  { id: 'score65', label: '外見偏差値65以上', ratio: 0.07, note: '主観評価を偏差値風に換算。正規分布なら上位約7%。' },
+  { id: 'score70', label: '外見偏差値70以上', ratio: 0.02, note: '主観評価を偏差値風に換算。正規分布なら上位約2%。' },
 ];
 
 export const specValueOptions: RatioOption<SpecValueId>[] = [

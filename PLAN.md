@@ -332,8 +332,8 @@ female: 63_569_000
 - 偏差値50以上: 50%
 - 偏差値55以上: 31%
 - 偏差値60以上: 16%
-- 偏差値63以上: 10%
-- 偏差値67以上: 5%
+- 偏差値65以上: 7%
+- 偏差値70以上: 2%
 
 スペ値:
 
@@ -409,7 +409,7 @@ const [filters, setFilters] = useState<FilterState>(() => getExtremeFemaleScenar
 - アラツー
 - 都市部
 - 未婚
-- 外見偏差値63以上
+- 外見偏差値65以上
 - スペ値105以上
 - Eカップ
 - 経験人数0人
@@ -420,11 +420,11 @@ const [filters, setFilters] = useState<FilterState>(() => getExtremeFemaleScenar
 4,105,000
 x 0.947
 x 0.56
-x 0.10
+x 0.07
 x 0.32
 x 0.09
 x 0.10
-= 約630人
+= 約440人
 ```
 
 ### 8.3 極端: 男性

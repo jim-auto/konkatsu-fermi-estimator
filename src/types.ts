@@ -14,7 +14,7 @@ export type ConditionId = CommonConditionId | FemaleConditionId | MaleConditionI
 
 export type AgeRangeId = 'around20' | 'around30' | 'around40' | 'around50';
 export type LocationId = 'urban' | 'regional';
-export type AppearanceId = 'score50' | 'score55' | 'score60' | 'score63' | 'score67';
+export type AppearanceId = 'score50' | 'score55' | 'score60' | 'score65' | 'score70';
 export type SpecValueId = 'over90' | 'over100' | 'over105' | 'over110';
 export type CupSizeId = 'aToB' | 'c' | 'd' | 'e' | 'f' | 'g' | 'hOrMore';
 export type ExperienceId =

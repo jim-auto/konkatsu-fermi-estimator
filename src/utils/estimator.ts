@@ -232,7 +232,7 @@ export function getExtremeMaleScenario(): FilterState {
       location: 'urban',
     },
     female: {
-      appearance: 'score63',
+      appearance: 'score65',
       specValue: 'over105',
       cupSize: 'e',
       experience: 'none',
@@ -254,7 +254,7 @@ export function getExtremeFemaleScenario(): FilterState {
       location: 'urban',
     },
     female: {
-      appearance: 'score63',
+      appearance: 'score65',
       specValue: 'over105',
       cupSize: 'e',
       experience: 'none',
