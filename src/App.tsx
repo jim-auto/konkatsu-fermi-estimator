@@ -23,11 +23,11 @@ export default function App() {
     <main className="app-shell">
       <header className="app-header">
         <div>
-          <p className="eyebrow">Konkatsu Fermi Estimator</p>
-          <h1>理想の相手、何人残る？</h1>
+          <p className="eyebrow">フェルミ推定で母集団を可視化</p>
+          <h1>恋人条件シミュレーター</h1>
         </div>
         <p>
-          日本人口を起点に、条件ごとの割合を掛け合わせるフェルミ推定です。条件を増やすほど、母集団がどれだけ削られるかを可視化します。
+          条件を重ねるほど、候補は何人残るのか。日本人口を起点に、フェルミ推定で恋人候補の母集団を可視化します。
         </p>
       </header>
 

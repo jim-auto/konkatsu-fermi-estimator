@@ -1,10 +1,10 @@
-# Konkatsu Fermi Estimator
+# 恋人条件シミュレーター
 
 <p align="center">
-  <img src="./docs/readme-preview.svg" alt="Konkatsu Fermi Estimator preview" width="100%">
+  <img src="./docs/readme-preview.svg" alt="恋人条件シミュレーター preview" width="100%">
 </p>
 
-「理想の相手がどれくらい存在するか」をフェルミ推定で可視化するツールです。
+恋人条件を重ねると、候補がどれくらい残るかをフェルミ推定で可視化するツールです。
 
 ## デモ説明
 

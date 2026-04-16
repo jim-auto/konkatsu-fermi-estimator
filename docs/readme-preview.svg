@@ -1,6 +1,6 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Konkatsu Fermi Estimator preview</title>
-  <desc id="desc">A preview card showing a Fermi estimation dashboard for dating conditions.</desc>
+  <title id="title">恋人条件シミュレーター preview</title>
+  <desc id="desc">恋人条件を重ねると候補がどれくらい残るかをフェルミ推定で可視化するダッシュボード。</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#1A2744" flood-opacity="0.14"/>
@@ -16,9 +16,9 @@
   <rect x="44" y="38" width="1112" height="554" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
 
   <g transform="translate(84 82)">
-    <text x="0" y="0" fill="#0E7C7B" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="800">KONKATSU FERMI ESTIMATOR</text>
-    <text x="0" y="68" fill="#111827" font-family="Inter, Segoe UI, sans-serif" font-size="58" font-weight="850">How rare is your ideal partner?</text>
-    <text x="0" y="114" fill="#657083" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="600">Conditions multiply. The population disappears fast.</text>
+    <text x="0" y="0" fill="#0E7C7B" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="800">FERMI DATING SIMULATOR</text>
+    <text x="0" y="68" fill="#111827" font-family="Inter, Segoe UI, sans-serif" font-size="58" font-weight="850">恋人条件シミュレーター</text>
+    <text x="0" y="114" fill="#657083" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="600">条件を重ねるほど、候補は何人残るのか。</text>
   </g>
 
   <g transform="translate(84 238)">
