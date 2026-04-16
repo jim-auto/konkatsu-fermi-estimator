@@ -3,8 +3,11 @@ import type {
   AppearanceId,
   BodyTypeId,
   ChildrenId,
+  CupSizeId,
   DualIncomeId,
   EducationId,
+  ExperienceId,
+  FemaleEducationId,
   FemaleEmploymentId,
   HeightId,
   IncomeId,
@@ -103,6 +106,19 @@ export const bodyTypeOptions: RatioOption<BodyTypeId>[] = [
   { id: 'fitness', label: '運動習慣あり', ratio: 0.16, note: '体型維持に積極的な層として狭める。' },
 ];
 
+export const cupSizeOptions: RatioOption<CupSizeId>[] = [
+  { id: 'overB', label: 'Bカップ以上', ratio: 0.78, note: '自己申告や見た目の印象に揺れがある条件として広めに置く。' },
+  { id: 'overC', label: 'Cカップ以上', ratio: 0.56, note: '平均よりやや絞る体型条件として扱う。' },
+  { id: 'overD', label: 'Dカップ以上', ratio: 0.32, note: '上位寄りの身体条件として大きく絞る。' },
+  { id: 'overE', label: 'Eカップ以上', ratio: 0.16, note: 'かなり希少な身体条件として扱う。' },
+];
+
+export const femaleEducationOptions: RatioOption<FemaleEducationId>[] = [
+  { id: 'college', label: '大卒以上', ratio: 0.52, note: '女性の大学・大学院卒を半数強に置く。' },
+  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.1, note: '大学群をさらに絞る仮定。' },
+  { id: 'graduate', label: '大学院卒', ratio: 0.06, note: '修士・博士まで限定。' },
+];
+
 export const femaleEmploymentOptions: RatioOption<FemaleEmploymentId>[] = [
   { id: 'fullTime', label: 'フルタイム', ratio: 0.55, note: 'フルタイム就業者を広めに見る。' },
   { id: 'regular', label: '正社員', ratio: 0.42, note: '雇用形態を正社員に限定。' },
@@ -119,6 +135,13 @@ export const childrenOptions: RatioOption<ChildrenId>[] = [
   { id: 'wants', label: '子供を希望', ratio: 0.58, note: '明確に子供を希望する層。' },
   { id: 'open', label: 'どちらでも可', ratio: 0.74, note: '相手や状況次第で柔軟な層。' },
   { id: 'noKids', label: '子供は希望しない', ratio: 0.18, note: 'DINKs志向などに限定。' },
+];
+
+export const experienceOptions: RatioOption<ExperienceId>[] = [
+  { id: 'zeroToTwo', label: '経験人数 0-2人', ratio: 0.32, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
+  { id: 'threeToFive', label: '経験人数 3-5人', ratio: 0.28, note: 'ボリュームゾーン寄りの範囲として置く。' },
+  { id: 'sixToTen', label: '経験人数 6-10人', ratio: 0.2, note: 'やや多めの経験レンジとして絞る。' },
+  { id: 'elevenPlus', label: '経験人数 11人以上', ratio: 0.12, note: '多めの経験レンジとしてさらに絞る。' },
 ];
 
 export const incomeOptions: RatioOption<IncomeId>[] = [

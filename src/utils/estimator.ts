@@ -3,8 +3,11 @@ import {
   appearanceOptions,
   bodyTypeOptions,
   childrenOptions,
+  cupSizeOptions,
   dualIncomeOptions,
   educationOptions,
+  experienceOptions,
+  femaleEducationOptions,
   femaleEmploymentOptions,
   heightOptions,
   incomeOptions,
@@ -122,6 +125,14 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
       const option = findById(bodyTypeOptions, input.female.bodyType);
       appendStep(steps, 'bodyType', option.label, option.ratio, option.note);
     }
+    if (input.enabled.cupSize) {
+      const option = findById(cupSizeOptions, input.female.cupSize);
+      appendStep(steps, 'cupSize', option.label, option.ratio, option.note);
+    }
+    if (input.enabled.femaleEducation) {
+      const option = findById(femaleEducationOptions, input.female.education);
+      appendStep(steps, 'femaleEducation', option.label, option.ratio, option.note);
+    }
     if (input.enabled.employment) {
       const option = findById(femaleEmploymentOptions, input.female.employment);
       appendStep(steps, 'employment', option.label, option.ratio, option.note);
@@ -133,6 +144,10 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
     if (input.enabled.children) {
       const option = findById(childrenOptions, input.female.children);
       appendStep(steps, 'children', option.label, option.ratio, option.note);
+    }
+    if (input.enabled.experience) {
+      const option = findById(experienceOptions, input.female.experience);
+      appendStep(steps, 'experience', option.label, option.ratio, option.note);
     }
   }
 
@@ -205,9 +220,12 @@ export function getAverageScenario(current: FilterState): FilterState {
       unmarried: true,
       appearance: true,
       bodyType: true,
+      cupSize: true,
+      femaleEducation: true,
       employment: true,
       dualIncome: true,
       children: true,
+      experience: true,
       income: true,
       height: true,
       education: true,
@@ -220,9 +238,12 @@ export function getAverageScenario(current: FilterState): FilterState {
     female: {
       appearance: 'top50',
       bodyType: 'standardOrSlim',
+      cupSize: 'overB',
+      education: 'college',
       employment: 'fullTime',
       dualIncome: 'flexible',
       children: 'open',
+      experience: 'threeToFive',
     },
     male: {
       income: 'over400',
@@ -243,9 +264,12 @@ export function getExtremeMaleScenario(): FilterState {
       unmarried: true,
       appearance: true,
       bodyType: true,
+      cupSize: true,
+      femaleEducation: true,
       employment: true,
       dualIncome: true,
       children: true,
+      experience: true,
       income: true,
       height: true,
       education: true,
@@ -258,9 +282,12 @@ export function getExtremeMaleScenario(): FilterState {
     female: {
       appearance: 'top10',
       bodyType: 'slim',
+      cupSize: 'overD',
+      education: 'college',
       employment: 'regular',
       dualIncome: 'yes',
       children: 'wants',
+      experience: 'zeroToTwo',
     },
     male: {
       income: 'over800',
@@ -283,9 +310,12 @@ export function getExtremeFemaleScenario(): FilterState {
     female: {
       appearance: 'top10',
       bodyType: 'slim',
+      cupSize: 'overD',
+      education: 'college',
       employment: 'regular',
       dualIncome: 'yes',
       children: 'wants',
+      experience: 'zeroToTwo',
     },
   };
 }

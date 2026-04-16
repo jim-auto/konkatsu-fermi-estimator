@@ -4,8 +4,11 @@ import {
   appearanceOptions,
   bodyTypeOptions,
   childrenOptions,
+  cupSizeOptions,
   dualIncomeOptions,
   educationOptions,
+  experienceOptions,
+  femaleEducationOptions,
   femaleEmploymentOptions,
   heightOptions,
   incomeOptions,
@@ -161,6 +164,36 @@ export function FilterPanel({
             }
           />
           <ConditionRow
+            conditionId="cupSize"
+            enabled={filters.enabled.cupSize}
+            title="カップ数"
+            description="自己申告前提の身体条件としてざっくり絞る"
+            value={filters.female.cupSize}
+            options={cupSizeOptions}
+            onToggle={toggleCondition}
+            onChange={(cupSize) =>
+              setFilters((current) => ({
+                ...current,
+                female: { ...current.female, cupSize },
+              }))
+            }
+          />
+          <ConditionRow
+            conditionId="femaleEducation"
+            enabled={filters.enabled.femaleEducation}
+            title="学歴"
+            description="女性対象にも学歴条件を加える"
+            value={filters.female.education}
+            options={femaleEducationOptions}
+            onToggle={toggleCondition}
+            onChange={(education) =>
+              setFilters((current) => ({
+                ...current,
+                female: { ...current.female, education },
+              }))
+            }
+          />
+          <ConditionRow
             conditionId="employment"
             enabled={filters.enabled.employment}
             title="職業"
@@ -202,6 +235,21 @@ export function FilterPanel({
               setFilters((current) => ({
                 ...current,
                 female: { ...current.female, children },
+              }))
+            }
+          />
+          <ConditionRow
+            conditionId="experience"
+            enabled={filters.enabled.experience}
+            title="経験人数"
+            description="自己申告前提のセンシティブ条件として扱う"
+            value={filters.female.experience}
+            options={experienceOptions}
+            onToggle={toggleCondition}
+            onChange={(experience) =>
+              setFilters((current) => ({
+                ...current,
+                female: { ...current.female, experience },
               }))
             }
           />

@@ -8,7 +8,7 @@ import {
 } from '../utils/estimator';
 
 export function useEstimator() {
-  const [filters, setFilters] = useState<FilterState>(() => getExtremeMaleScenario());
+  const [filters, setFilters] = useState<FilterState>(() => getExtremeFemaleScenario());
 
   const result = useMemo(() => estimatePopulation(filters), [filters]);
   const averageResult = useMemo(
