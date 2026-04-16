@@ -1,17 +1,11 @@
 import type {
   AgeRangeId,
   AppearanceId,
-  ChildrenId,
   CupSizeId,
-  DualIncomeId,
-  EducationId,
   ExperienceId,
-  FemaleEducationId,
-  FemaleEmploymentId,
   HeightId,
   IncomeId,
   LocationId,
-  MaleOccupationId,
   RatioOption,
   SpecValueId,
   TargetGender,
@@ -110,30 +104,6 @@ export const cupSizeOptions: RatioOption<CupSizeId>[] = [
   { id: 'hOrMore', label: 'Hカップ以上', ratio: 0.01, note: 'かなり希少な自己申告条件として扱う。' },
 ];
 
-export const femaleEducationOptions: RatioOption<FemaleEducationId>[] = [
-  { id: 'college', label: '大卒以上', ratio: 0.42, note: '2020年国勢調査の若年層最終学歴を参考に大学・大学院卒を置く。' },
-  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.1, note: '公式統計では大学群を分けにくいため仮定。' },
-  { id: 'graduate', label: '大学院卒', ratio: 0.06, note: '学校基本調査の男女差を参考に、女性大学院卒を狭めに置く。' },
-];
-
-export const femaleEmploymentOptions: RatioOption<FemaleEmploymentId>[] = [
-  { id: 'fullTime', label: 'フルタイム', ratio: 0.55, note: 'フルタイム就業者を広めに見る。' },
-  { id: 'regular', label: '正社員', ratio: 0.42, note: '雇用形態を正社員に限定。' },
-  { id: 'professional', label: '専門職', ratio: 0.13, note: '医療・士業・ITなどの専門職に限定。' },
-];
-
-export const dualIncomeOptions: RatioOption<DualIncomeId>[] = [
-  { id: 'yes', label: '共働き希望', ratio: 0.68, note: '結婚後も働く意向がある層。' },
-  { id: 'flexible', label: '状況次第で可', ratio: 0.78, note: '共働きに拒否感がない層を広めに見る。' },
-  { id: 'homemaker', label: '専業志向', ratio: 0.2, note: '専業・家庭優先を希望する層。' },
-];
-
-export const childrenOptions: RatioOption<ChildrenId>[] = [
-  { id: 'wants', label: '子供を希望', ratio: 0.58, note: '明確に子供を希望する層。' },
-  { id: 'open', label: 'どちらでも可', ratio: 0.74, note: '相手や状況次第で柔軟な層。' },
-  { id: 'noKids', label: '子供は希望しない', ratio: 0.18, note: 'DINKs志向などに限定。' },
-];
-
 export const experienceOptions: RatioOption<ExperienceId>[] = [
   { id: 'none', label: '経験人数 0人', ratio: 0.1, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
   { id: 'oneToTwo', label: '経験人数 1-2人', ratio: 0.22, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
@@ -156,17 +126,4 @@ export const heightOptions: RatioOption<HeightId>[] = [
   { id: 'over170', label: '身長170cm以上', ratio: 0.61, note: '男性20-40代の平均身長171cm台を基準に正規近似。' },
   { id: 'over175', label: '身長175cm以上', ratio: 0.27, note: '男性身長分布の上位3割弱として正規近似。' },
   { id: 'over180', label: '身長180cm以上', ratio: 0.06, note: '男性身長分布の上位数%として正規近似。' },
-];
-
-export const educationOptions: RatioOption<EducationId>[] = [
-  { id: 'college', label: '大卒以上', ratio: 0.46, note: '2020年国勢調査の若年層最終学歴を参考に大学・大学院卒を置く。' },
-  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.12, note: '公式統計では大学群を分けにくいため仮定。' },
-  { id: 'graduate', label: '大学院卒', ratio: 0.09, note: '学校基本調査の大学院進学率・男女差を参考に置く。' },
-];
-
-export const maleOccupationOptions: RatioOption<MaleOccupationId>[] = [
-  { id: 'regular', label: '正社員', ratio: 0.68, note: '安定雇用を広めに捉える。' },
-  { id: 'stable', label: '安定職', ratio: 0.38, note: '大企業・公務員・堅い専門職など。' },
-  { id: 'professional', label: '専門職', ratio: 0.17, note: '士業・医師・IT専門職など。' },
-  { id: 'executive', label: '経営者/役員', ratio: 0.06, note: '肩書きで強く絞る条件。' },
 ];

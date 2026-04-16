@@ -1,17 +1,11 @@
 import {
   ageRanges,
   appearanceOptions,
-  childrenOptions,
   cupSizeOptions,
-  dualIncomeOptions,
-  educationOptions,
   experienceOptions,
-  femaleEducationOptions,
-  femaleEmploymentOptions,
   heightOptions,
   incomeOptions,
   locationOptions,
-  maleOccupationOptions,
   population,
   specValueOptions,
   targetLabels,
@@ -129,22 +123,6 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
       const option = findById(cupSizeOptions, input.female.cupSize);
       appendStep(steps, 'cupSize', option.label, option.ratio, option.note);
     }
-    if (input.enabled.femaleEducation) {
-      const option = findById(femaleEducationOptions, input.female.education);
-      appendStep(steps, 'femaleEducation', option.label, option.ratio, option.note);
-    }
-    if (input.enabled.employment) {
-      const option = findById(femaleEmploymentOptions, input.female.employment);
-      appendStep(steps, 'employment', option.label, option.ratio, option.note);
-    }
-    if (input.enabled.dualIncome) {
-      const option = findById(dualIncomeOptions, input.female.dualIncome);
-      appendStep(steps, 'dualIncome', option.label, option.ratio, option.note);
-    }
-    if (input.enabled.children) {
-      const option = findById(childrenOptions, input.female.children);
-      appendStep(steps, 'children', option.label, option.ratio, option.note);
-    }
     if (input.enabled.experience) {
       const option = findById(experienceOptions, input.female.experience);
       appendStep(steps, 'experience', option.label, option.ratio, option.note);
@@ -159,14 +137,6 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
     if (input.enabled.height) {
       const option = findById(heightOptions, input.male.height);
       appendStep(steps, 'height', option.label, option.ratio, option.note);
-    }
-    if (input.enabled.education) {
-      const option = findById(educationOptions, input.male.education);
-      appendStep(steps, 'education', option.label, option.ratio, option.note);
-    }
-    if (input.enabled.occupation) {
-      const option = findById(maleOccupationOptions, input.male.occupation);
-      appendStep(steps, 'occupation', option.label, option.ratio, option.note);
     }
   }
 
@@ -221,35 +191,23 @@ export function getAverageScenario(current: FilterState): FilterState {
       appearance: true,
       specValue: true,
       cupSize: true,
-      femaleEducation: true,
-      employment: true,
-      dualIncome: true,
-      children: true,
       experience: true,
       income: true,
       height: true,
-      education: true,
-      occupation: true,
     },
     common: {
-      ageRange: 'around30',
+      ageRange: 'around20',
       location: 'urban',
     },
     female: {
       appearance: 'top50',
       specValue: 'over90',
       cupSize: 'c',
-      education: 'college',
-      employment: 'fullTime',
-      dualIncome: 'flexible',
-      children: 'open',
       experience: 'threeToFive',
     },
     male: {
       income: 'over400',
       height: 'over170',
-      education: 'college',
-      occupation: 'regular',
     },
   };
 }
@@ -265,35 +223,23 @@ export function getExtremeMaleScenario(): FilterState {
       appearance: true,
       specValue: true,
       cupSize: true,
-      femaleEducation: true,
-      employment: true,
-      dualIncome: true,
-      children: true,
       experience: true,
       income: true,
       height: true,
-      education: true,
-      occupation: true,
     },
     common: {
-      ageRange: 'around30',
+      ageRange: 'around20',
       location: 'urban',
     },
     female: {
       appearance: 'top10',
       specValue: 'over105',
       cupSize: 'd',
-      education: 'college',
-      employment: 'regular',
-      dualIncome: 'yes',
-      children: 'wants',
       experience: 'oneToTwo',
     },
     male: {
       income: 'over800',
       height: 'over175',
-      education: 'college',
-      occupation: 'stable',
     },
   };
 }
@@ -304,17 +250,13 @@ export function getExtremeFemaleScenario(): FilterState {
     targetGender: 'female',
     compareMode: true,
     common: {
-      ageRange: 'around30',
+      ageRange: 'around20',
       location: 'urban',
     },
     female: {
       appearance: 'top10',
       specValue: 'over105',
       cupSize: 'd',
-      education: 'college',
-      employment: 'regular',
-      dualIncome: 'yes',
-      children: 'wants',
       experience: 'oneToTwo',
     },
   };

@@ -2,17 +2,11 @@ import type { Dispatch, SetStateAction } from 'react';
 import {
   ageRanges,
   appearanceOptions,
-  childrenOptions,
   cupSizeOptions,
-  dualIncomeOptions,
-  educationOptions,
   experienceOptions,
-  femaleEducationOptions,
-  femaleEmploymentOptions,
   heightOptions,
   incomeOptions,
   locationOptions,
-  maleOccupationOptions,
   searchLabels,
   specValueOptions,
 } from '../data/assumptions';
@@ -179,66 +173,6 @@ export function FilterPanel({
             }
           />
           <ConditionRow
-            conditionId="femaleEducation"
-            enabled={filters.enabled.femaleEducation}
-            title="学歴"
-            description="女性対象にも学歴条件を加える"
-            value={filters.female.education}
-            options={femaleEducationOptions}
-            onToggle={toggleCondition}
-            onChange={(education) =>
-              setFilters((current) => ({
-                ...current,
-                female: { ...current.female, education },
-              }))
-            }
-          />
-          <ConditionRow
-            conditionId="employment"
-            enabled={filters.enabled.employment}
-            title="職業"
-            description="就業形態または専門性で絞る"
-            value={filters.female.employment}
-            options={femaleEmploymentOptions}
-            onToggle={toggleCondition}
-            onChange={(employment) =>
-              setFilters((current) => ({
-                ...current,
-                female: { ...current.female, employment },
-              }))
-            }
-          />
-          <ConditionRow
-            conditionId="dualIncome"
-            enabled={filters.enabled.dualIncome}
-            title="共働き可否"
-            description="結婚後の働き方の希望を加える"
-            value={filters.female.dualIncome}
-            options={dualIncomeOptions}
-            onToggle={toggleCondition}
-            onChange={(dualIncome) =>
-              setFilters((current) => ({
-                ...current,
-                female: { ...current.female, dualIncome },
-              }))
-            }
-          />
-          <ConditionRow
-            conditionId="children"
-            enabled={filters.enabled.children}
-            title="子供希望"
-            description="家族観の条件を追加する"
-            value={filters.female.children}
-            options={childrenOptions}
-            onToggle={toggleCondition}
-            onChange={(children) =>
-              setFilters((current) => ({
-                ...current,
-                female: { ...current.female, children },
-              }))
-            }
-          />
-          <ConditionRow
             conditionId="experience"
             enabled={filters.enabled.experience}
             title="経験人数"
@@ -284,36 +218,6 @@ export function FilterPanel({
               setFilters((current) => ({
                 ...current,
                 male: { ...current.male, height },
-              }))
-            }
-          />
-          <ConditionRow
-            conditionId="education"
-            enabled={filters.enabled.education}
-            title="学歴"
-            description="学歴条件でさらに絞る"
-            value={filters.male.education}
-            options={educationOptions}
-            onToggle={toggleCondition}
-            onChange={(education) =>
-              setFilters((current) => ({
-                ...current,
-                male: { ...current.male, education },
-              }))
-            }
-          />
-          <ConditionRow
-            conditionId="occupation"
-            enabled={filters.enabled.occupation}
-            title="職業"
-            description="雇用安定性や職種で絞る"
-            value={filters.male.occupation}
-            options={maleOccupationOptions}
-            onToggle={toggleCondition}
-            onChange={(occupation) =>
-              setFilters((current) => ({
-                ...current,
-                male: { ...current.male, occupation },
               }))
             }
           />
