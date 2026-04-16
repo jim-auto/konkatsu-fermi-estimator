@@ -2,7 +2,6 @@ import type { Dispatch, SetStateAction } from 'react';
 import {
   ageRanges,
   appearanceOptions,
-  bodyTypeOptions,
   childrenOptions,
   cupSizeOptions,
   dualIncomeOptions,
@@ -15,6 +14,7 @@ import {
   locationOptions,
   maleOccupationOptions,
   searchLabels,
+  specValueOptions,
 } from '../data/assumptions';
 import type { ConditionId, FilterState, TargetGender } from '../types';
 import { ConditionRow } from './ConditionRow';
@@ -149,17 +149,17 @@ export function FilterPanel({
             }
           />
           <ConditionRow
-            conditionId="bodyType"
-            enabled={filters.enabled.bodyType}
-            title="BMI/体型"
-            description="ざっくりした体型条件で絞る"
-            value={filters.female.bodyType}
-            options={bodyTypeOptions}
+            conditionId="specValue"
+            enabled={filters.enabled.specValue}
+            title="スペ値"
+            description="身長(cm) - 体重(kg) の値で絞る"
+            value={filters.female.specValue}
+            options={specValueOptions}
             onToggle={toggleCondition}
-            onChange={(bodyType) =>
+            onChange={(specValue) =>
               setFilters((current) => ({
                 ...current,
-                female: { ...current.female, bodyType },
+                female: { ...current.female, specValue },
               }))
             }
           />

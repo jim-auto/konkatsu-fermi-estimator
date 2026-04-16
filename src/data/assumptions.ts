@@ -1,7 +1,6 @@
 import type {
   AgeRangeId,
   AppearanceId,
-  BodyTypeId,
   ChildrenId,
   CupSizeId,
   DualIncomeId,
@@ -14,6 +13,7 @@ import type {
   LocationId,
   MaleOccupationId,
   RatioOption,
+  SpecValueId,
   TargetGender,
 } from '../types';
 
@@ -41,39 +41,32 @@ export const ageRanges: Array<{
   note: string;
 }> = [
   {
-    id: '20-29',
-    label: '20-29歳',
-    counts: { male: 6_587_000, female: 6_192_000 },
-    unmarriedRatio: { male: 0.86, female: 0.794 },
-    note: '人口は人口推計2024年、未婚率は2020年国勢調査の20-24歳/25-29歳を加重平均。',
+    id: 'around20',
+    label: 'アラツー（18-24歳）',
+    counts: { male: 4_365_000, female: 4_105_000 },
+    unmarriedRatio: { male: 0.967, female: 0.947 },
+    note: '人口は人口推計2024年の18-24歳。未婚率は18-19歳をほぼ未婚、20-24歳は2020年国勢調査で近似。',
   },
   {
-    id: '25-34',
-    label: '25-34歳',
+    id: 'around30',
+    label: 'アラサー（25-34歳）',
     counts: { male: 6_644_000, female: 6_270_000 },
     unmarriedRatio: { male: 0.638, female: 0.518 },
     note: '人口は人口推計2024年、未婚率は2020年国勢調査の25-29歳/30-34歳を加重平均。',
   },
   {
-    id: '30-39',
-    label: '30-39歳',
-    counts: { male: 6_797_000, female: 6_469_000 },
-    unmarriedRatio: { male: 0.448, female: 0.32 },
-    note: '人口は人口推計2024年、未婚率は2020年国勢調査の30-34歳/35-39歳を加重平均。',
-  },
-  {
-    id: '35-44',
-    label: '35-44歳',
+    id: 'around40',
+    label: 'アラフォー（35-44歳）',
     counts: { male: 7_379_000, female: 7_122_000 },
     unmarriedRatio: { male: 0.352, female: 0.236 },
     note: '人口は人口推計2024年、未婚率は2020年国勢調査の35-39歳/40-44歳を加重平均。',
   },
   {
-    id: '40-49',
-    label: '40-49歳',
-    counts: { male: 8_301_000, female: 8_073_000 },
-    unmarriedRatio: { male: 0.31, female: 0.202 },
-    note: '人口は人口推計2024年、未婚率は2020年国勢調査の40-44歳/45-49歳を加重平均。',
+    id: 'around50',
+    label: 'アラフィフ前半（45-49歳）',
+    counts: { male: 4_431_000, female: 4_313_000 },
+    unmarriedRatio: { male: 0.299, female: 0.192 },
+    note: '人口は人口推計2024年の45-49歳。未婚率は2020年国勢調査の45-49歳を使用。',
   },
 ];
 
@@ -100,17 +93,18 @@ export const appearanceOptions: RatioOption<AppearanceId>[] = [
   { id: 'top5', label: '外見 上位5%', ratio: 0.05, note: 'かなり希少な見た目条件。' },
 ];
 
-export const bodyTypeOptions: RatioOption<BodyTypeId>[] = [
-  { id: 'standardOrSlim', label: '標準-細身', ratio: 0.83, note: '国民健康・栄養調査の若年女性BMIから、肥満ではない層を広めに置く。' },
-  { id: 'slim', label: '細身', ratio: 0.32, note: '若年女性のやせ/BMI20以下に近い層として置く。' },
-  { id: 'fitness', label: '運動習慣あり', ratio: 0.16, note: '運動習慣は婚活向け主観条件として仮定を残す。' },
+export const specValueOptions: RatioOption<SpecValueId>[] = [
+  { id: 'over90', label: 'スペ値90以上', ratio: 0.78, note: '身長(cm)-体重(kg)。国民健康・栄養調査の身長・体重分布を参考に広めに置く。' },
+  { id: 'over100', label: 'スペ値100以上', ratio: 0.52, note: '美容・婚活文脈でよく使われる目安。実統計ではなく近似。' },
+  { id: 'over105', label: 'スペ値105以上', ratio: 0.32, note: '細身寄りの条件として強めに絞る。' },
+  { id: 'over110', label: 'スペ値110以上', ratio: 0.15, note: 'かなり細身の条件として扱う。' },
 ];
 
 export const cupSizeOptions: RatioOption<CupSizeId>[] = [
-  { id: 'overB', label: 'Bカップ以上', ratio: 0.78, note: '自己申告や見た目の印象に揺れがある条件として広めに置く。' },
-  { id: 'overC', label: 'Cカップ以上', ratio: 0.56, note: '平均よりやや絞る体型条件として扱う。' },
-  { id: 'overD', label: 'Dカップ以上', ratio: 0.32, note: '上位寄りの身体条件として大きく絞る。' },
-  { id: 'overE', label: 'Eカップ以上', ratio: 0.16, note: 'かなり希少な身体条件として扱う。' },
+  { id: 'aToB', label: 'A-Bカップ', ratio: 0.42, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
+  { id: 'c', label: 'Cカップ', ratio: 0.24, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
+  { id: 'd', label: 'Dカップ', ratio: 0.18, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
+  { id: 'eOrMore', label: 'Eカップ以上', ratio: 0.16, note: '民間調査を参考にした自己申告前提のレンジ仮定。' },
 ];
 
 export const femaleEducationOptions: RatioOption<FemaleEducationId>[] = [
@@ -138,10 +132,12 @@ export const childrenOptions: RatioOption<ChildrenId>[] = [
 ];
 
 export const experienceOptions: RatioOption<ExperienceId>[] = [
-  { id: 'zeroToTwo', label: '経験人数 0-2人', ratio: 0.32, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
+  { id: 'none', label: '経験人数 0人', ratio: 0.1, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
+  { id: 'oneToTwo', label: '経験人数 1-2人', ratio: 0.22, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
   { id: 'threeToFive', label: '経験人数 3-5人', ratio: 0.28, note: 'ボリュームゾーン寄りの範囲として置く。' },
   { id: 'sixToTen', label: '経験人数 6-10人', ratio: 0.2, note: 'やや多めの経験レンジとして絞る。' },
-  { id: 'elevenPlus', label: '経験人数 11人以上', ratio: 0.12, note: '多めの経験レンジとしてさらに絞る。' },
+  { id: 'elevenToTwenty', label: '経験人数 11-20人', ratio: 0.12, note: '多めの経験レンジとしてさらに絞る。' },
+  { id: 'twentyOnePlus', label: '経験人数 21人以上', ratio: 0.08, note: 'かなり多めの経験レンジとして扱う。' },
 ];
 
 export const incomeOptions: RatioOption<IncomeId>[] = [

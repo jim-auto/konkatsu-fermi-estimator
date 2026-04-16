@@ -1,7 +1,6 @@
 import {
   ageRanges,
   appearanceOptions,
-  bodyTypeOptions,
   childrenOptions,
   cupSizeOptions,
   dualIncomeOptions,
@@ -14,6 +13,7 @@ import {
   locationOptions,
   maleOccupationOptions,
   population,
+  specValueOptions,
   targetLabels,
 } from '../data/assumptions';
 import type {
@@ -121,9 +121,9 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
       const option = findById(appearanceOptions, input.female.appearance);
       appendStep(steps, 'appearance', option.label, option.ratio, option.note);
     }
-    if (input.enabled.bodyType) {
-      const option = findById(bodyTypeOptions, input.female.bodyType);
-      appendStep(steps, 'bodyType', option.label, option.ratio, option.note);
+    if (input.enabled.specValue) {
+      const option = findById(specValueOptions, input.female.specValue);
+      appendStep(steps, 'specValue', option.label, option.ratio, option.note);
     }
     if (input.enabled.cupSize) {
       const option = findById(cupSizeOptions, input.female.cupSize);
@@ -219,7 +219,7 @@ export function getAverageScenario(current: FilterState): FilterState {
       location: true,
       unmarried: true,
       appearance: true,
-      bodyType: true,
+      specValue: true,
       cupSize: true,
       femaleEducation: true,
       employment: true,
@@ -232,13 +232,13 @@ export function getAverageScenario(current: FilterState): FilterState {
       occupation: true,
     },
     common: {
-      ageRange: '30-39',
+      ageRange: 'around30',
       location: 'urban',
     },
     female: {
       appearance: 'top50',
-      bodyType: 'standardOrSlim',
-      cupSize: 'overB',
+      specValue: 'over90',
+      cupSize: 'c',
       education: 'college',
       employment: 'fullTime',
       dualIncome: 'flexible',
@@ -263,7 +263,7 @@ export function getExtremeMaleScenario(): FilterState {
       location: true,
       unmarried: true,
       appearance: true,
-      bodyType: true,
+      specValue: true,
       cupSize: true,
       femaleEducation: true,
       employment: true,
@@ -276,18 +276,18 @@ export function getExtremeMaleScenario(): FilterState {
       occupation: true,
     },
     common: {
-      ageRange: '30-39',
+      ageRange: 'around30',
       location: 'urban',
     },
     female: {
       appearance: 'top10',
-      bodyType: 'slim',
-      cupSize: 'overD',
+      specValue: 'over105',
+      cupSize: 'd',
       education: 'college',
       employment: 'regular',
       dualIncome: 'yes',
       children: 'wants',
-      experience: 'zeroToTwo',
+      experience: 'oneToTwo',
     },
     male: {
       income: 'over800',
@@ -304,18 +304,18 @@ export function getExtremeFemaleScenario(): FilterState {
     targetGender: 'female',
     compareMode: true,
     common: {
-      ageRange: '25-34',
+      ageRange: 'around30',
       location: 'urban',
     },
     female: {
       appearance: 'top10',
-      bodyType: 'slim',
-      cupSize: 'overD',
+      specValue: 'over105',
+      cupSize: 'd',
       education: 'college',
       employment: 'regular',
       dualIncome: 'yes',
       children: 'wants',
-      experience: 'zeroToTwo',
+      experience: 'oneToTwo',
     },
   };
 }
