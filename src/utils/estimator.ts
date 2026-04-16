@@ -234,8 +234,8 @@ export function getExtremeMaleScenario(): FilterState {
     female: {
       appearance: 'top10',
       specValue: 'over105',
-      cupSize: 'd',
-      experience: 'oneToTwo',
+      cupSize: 'e',
+      experience: 'none',
     },
     male: {
       income: 'over800',
@@ -256,8 +256,8 @@ export function getExtremeFemaleScenario(): FilterState {
     female: {
       appearance: 'top10',
       specValue: 'over105',
-      cupSize: 'd',
-      experience: 'oneToTwo',
+      cupSize: 'e',
+      experience: 'none',
     },
   };
 }

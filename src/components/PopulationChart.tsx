@@ -1,12 +1,3 @@
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
 import type { EstimationResult } from '../types';
 import { formatPeople, formatPercent } from '../utils/estimator';
 
@@ -14,15 +5,31 @@ interface PopulationChartProps {
   result: EstimationResult;
 }
 
+function formatAxisPeople(value: number): string {
+  if (value >= 100_000_000) {
+    return `${(value / 100_000_000).toFixed(1)}億`;
+  }
+  if (value >= 10_000) {
+    return `${Math.round(value / 10_000).toLocaleString('ja-JP')}万`;
+  }
+  return Math.round(value).toLocaleString('ja-JP');
+}
+
+function formatAxisLabel(value: string): string {
+  return value.length > 8 ? `${value.slice(0, 8)}…` : value;
+}
+
 export function PopulationChart({ result }: PopulationChartProps) {
   const chartData = result.steps.map((step, index) => ({
     name: index === 0 ? '母集団' : step.label,
     people: Math.max(1, Math.round(step.remaining)),
+    logPeople: Math.log10(Math.max(1, step.remaining)),
   }));
   const stepDetails = result.steps.slice(1).map((step, index) => ({
     step,
     previous: result.steps[index].remaining,
   }));
+  const maxLogPeople = Math.max(...chartData.map((item) => item.logPeople), 1);
 
   return (
     <section className="panel chart-panel" aria-label="条件ごとの残存人数">
@@ -31,7 +38,7 @@ export function PopulationChart({ result }: PopulationChartProps) {
           <p className="eyebrow">Fermi Funnel</p>
           <h2>条件ごとの残存人数</h2>
         </div>
-        <span className="chart-note">フェルミ推定 / 対数スケール</span>
+        <span className="chart-note">フェルミ推定 / 対数バー</span>
       </div>
 
       <div className="fermi-callout">
@@ -40,39 +47,17 @@ export function PopulationChart({ result }: PopulationChartProps) {
       </div>
 
       <div className="chart-box">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 16, right: 20, left: 8, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#d8dee8" />
-            <XAxis
-              dataKey="name"
-              tick={{ fill: '#4b5563', fontSize: 12 }}
-              interval={0}
-              angle={-18}
-              textAnchor="end"
-              height={70}
-            />
-            <YAxis
-              scale="log"
-              domain={[1, 'dataMax']}
-              tickFormatter={(value) => `${Number(value).toLocaleString('ja-JP')}`}
-              tick={{ fill: '#4b5563', fontSize: 12 }}
-              width={74}
-            />
-            <Tooltip
-              formatter={(value) => [formatPeople(Number(value)), '残存人数']}
-              labelStyle={{ color: '#111827' }}
-              contentStyle={{ borderRadius: 8, border: '1px solid #d8dee8' }}
-            />
-            <Line
-              type="monotone"
-              dataKey="people"
-              stroke="#d1495b"
-              strokeWidth={3}
-              dot={{ r: 4, strokeWidth: 2, fill: '#ffffff' }}
-              activeDot={{ r: 7 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+        <div className="funnel-bars">
+          {chartData.map((item, index) => (
+            <div className="funnel-bar-row" key={`${item.name}-${index}`}>
+              <span className="funnel-bar-label">{formatAxisLabel(item.name)}</span>
+              <div className="funnel-bar-track" aria-hidden="true">
+                <span style={{ width: `${Math.max(4, (item.logPeople / maxLogPeople) * 100)}%` }} />
+              </div>
+              <strong>{formatAxisPeople(item.people)}人</strong>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="step-list">
