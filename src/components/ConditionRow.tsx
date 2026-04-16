@@ -29,7 +29,7 @@ export function ConditionRow<TId extends string>({
   };
 
   return (
-    <div className={`condition-row ${enabled ? 'is-enabled' : ''}`}>
+    <div className={`condition-row condition-${conditionId} ${enabled ? 'is-enabled' : ''}`}>
       <label className="toggle" aria-label={`${title}を条件に含める`}>
         <input type="checkbox" checked={enabled} onChange={() => onToggle(conditionId)} />
         <span />

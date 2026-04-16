@@ -212,6 +212,10 @@ h1 {
   background: #f4fbfa;
 }
 
+.condition-age {
+  grid-column: 1 / -1;
+}
+
 .toggle {
   display: inline-flex;
   align-items: center;
@@ -304,6 +308,29 @@ select:disabled {
   align-items: center;
   padding: 0 12px;
   color: var(--teal);
+}
+
+.age-range-control {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.age-range-control label {
+  display: grid;
+  gap: 5px;
+}
+
+.age-range-control span,
+.age-range-hint {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.age-range-hint {
+  display: block;
+  margin-top: 6px;
 }
 
 .result-panel {
@@ -708,6 +735,10 @@ select:disabled {
 
   .chart-box {
     padding: 12px;
+  }
+
+  .age-range-control {
+    grid-template-columns: 1fr;
   }
 
   .funnel-bar-row {

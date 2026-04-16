@@ -12,7 +12,14 @@ export type MaleConditionId = 'income' | 'height';
 
 export type ConditionId = CommonConditionId | FemaleConditionId | MaleConditionId;
 
-export type AgeRangeId = 'around20' | 'around30' | 'around40' | 'around50';
+export type AgeBucketId =
+  | 'lateTeens'
+  | 'early20s'
+  | 'late20s'
+  | 'early30s'
+  | 'late30s'
+  | 'early40s'
+  | 'late40s';
 export type LocationId = 'urban' | 'regional';
 export type AppearanceId = 'score50' | 'score55' | 'score60' | 'score65' | 'score70';
 export type SpecValueId = 'over90' | 'over100' | 'over105' | 'over110';
@@ -34,7 +41,8 @@ export interface FilterState {
   compareMode: boolean;
   enabled: EnabledConditions;
   common: {
-    ageRange: AgeRangeId;
+    ageFrom: AgeBucketId;
+    ageTo: AgeBucketId;
     location: LocationId;
   };
   female: {

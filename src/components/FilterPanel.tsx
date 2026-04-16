@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react';
 import {
-  ageRanges,
+  ageBuckets,
   appearanceOptions,
   cupSizeOptions,
   experienceOptions,
@@ -12,6 +12,11 @@ import {
 } from '../data/assumptions';
 import type { ConditionId, FilterState, TargetGender } from '../types';
 import { ConditionRow } from './ConditionRow';
+
+function getAgeBucketIndex(ageBucketId: FilterState['common']['ageFrom']): number {
+  const index = ageBuckets.findIndex((item) => item.id === ageBucketId);
+  return index < 0 ? 0 : index;
+}
 
 interface FilterPanelProps {
   filters: FilterState;
@@ -34,6 +39,9 @@ export function FilterPanel({
   applyExtremeFemalePreset,
   applyAveragePreset,
 }: FilterPanelProps) {
+  const ageFromIndex = getAgeBucketIndex(filters.common.ageFrom);
+  const ageToIndex = getAgeBucketIndex(filters.common.ageTo);
+
   return (
     <section className="panel control-panel" aria-label="条件入力">
       <div className="panel-header">
@@ -82,22 +90,69 @@ export function FilterPanel({
           conditionId="age"
           enabled={filters.enabled.age}
           title="年齢レンジ"
-          description="対象性別の人口から指定年齢だけを残す"
-          value={filters.common.ageRange}
-          options={ageRanges.map((item) => ({
-            id: item.id,
-            label: item.label,
-            ratio: item.counts[filters.targetGender],
-            note: item.note,
-          }))}
+          description="最小と最大の年齢帯ではさんで対象人口を残す"
           onToggle={toggleCondition}
-          onChange={(ageRange) =>
-            setFilters((current) => ({
-              ...current,
-              common: { ...current.common, ageRange },
-            }))
-          }
-        />
+        >
+          <div className="age-range-control">
+            <label>
+              <span>最小</span>
+              <select
+                value={filters.common.ageFrom}
+                disabled={!filters.enabled.age}
+                onChange={(event) => {
+                  const ageFrom = event.target.value as FilterState['common']['ageFrom'];
+                  setFilters((current) => {
+                    const nextFromIndex = getAgeBucketIndex(ageFrom);
+                    const currentToIndex = getAgeBucketIndex(current.common.ageTo);
+                    return {
+                      ...current,
+                      common: {
+                        ...current.common,
+                        ageFrom,
+                        ageTo: currentToIndex < nextFromIndex ? ageFrom : current.common.ageTo,
+                      },
+                    };
+                  });
+                }}
+              >
+                {ageBuckets.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>最大</span>
+              <select
+                value={filters.common.ageTo}
+                disabled={!filters.enabled.age}
+                onChange={(event) => {
+                  const ageTo = event.target.value as FilterState['common']['ageTo'];
+                  setFilters((current) => {
+                    const currentFromIndex = getAgeBucketIndex(current.common.ageFrom);
+                    const nextToIndex = getAgeBucketIndex(ageTo);
+                    return {
+                      ...current,
+                      common: {
+                        ...current.common,
+                        ageFrom: nextToIndex < currentFromIndex ? ageTo : current.common.ageFrom,
+                        ageTo,
+                      },
+                    };
+                  });
+                }}
+              >
+                {ageBuckets.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          {ageFromIndex > ageToIndex ? <span className="age-range-hint">範囲を自動補正します</span> : null}
+        </ConditionRow>
         <ConditionRow
           conditionId="unmarried"
           enabled={filters.enabled.unmarried}

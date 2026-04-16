@@ -1,5 +1,5 @@
 import type {
-  AgeRangeId,
+  AgeBucketId,
   AppearanceId,
   CupSizeId,
   ExperienceId,
@@ -27,37 +27,58 @@ export const searchLabels: Record<TargetGender, string> = {
   male: '男性を探す',
 };
 
-export const ageRanges: Array<{
-  id: AgeRangeId;
+export const ageBuckets: Array<{
+  id: AgeBucketId;
   label: string;
   counts: Record<TargetGender, number>;
   unmarriedRatio: Record<TargetGender, number>;
   note: string;
 }> = [
   {
-    id: 'around20',
-    label: 'アラツー（18-24歳）',
-    counts: { male: 4_365_000, female: 4_105_000 },
-    unmarriedRatio: { male: 0.967, female: 0.947 },
-    note: '人口は人口推計2024年の18-24歳。未婚率は18-19歳をほぼ未婚、20-24歳は2020年国勢調査で近似。',
+    id: 'lateTeens',
+    label: '10代後半',
+    counts: { male: 1_247_000, female: 1_173_000 },
+    unmarriedRatio: { male: 0.995, female: 0.995 },
+    note: '18-24歳人口を年数按分し、18-19歳はほぼ未婚として置く。',
   },
   {
-    id: 'around30',
-    label: 'アラサー（25-34歳）',
-    counts: { male: 6_644_000, female: 6_270_000 },
-    unmarriedRatio: { male: 0.638, female: 0.518 },
-    note: '人口は人口推計2024年、未婚率は2020年国勢調査の25-29歳/30-34歳を加重平均。',
+    id: 'early20s',
+    label: '20代前半',
+    counts: { male: 3_118_000, female: 2_932_000 },
+    unmarriedRatio: { male: 0.956, female: 0.928 },
+    note: '18-24歳人口から18-19歳を除いた近似。未婚率は18-24歳全体と整合するように調整。',
   },
   {
-    id: 'around40',
-    label: 'アラフォー（35-44歳）',
-    counts: { male: 7_379_000, female: 7_122_000 },
-    unmarriedRatio: { male: 0.352, female: 0.236 },
-    note: '人口は人口推計2024年、未婚率は2020年国勢調査の35-39歳/40-44歳を加重平均。',
+    id: 'late20s',
+    label: '20代後半',
+    counts: { male: 3_322_000, female: 3_135_000 },
+    unmarriedRatio: { male: 0.73, female: 0.62 },
+    note: '25-34歳人口を前後半に按分。未婚率は2020年国勢調査の5歳階級に寄せた近似。',
   },
   {
-    id: 'around50',
-    label: 'アラフィフ前半（45-49歳）',
+    id: 'early30s',
+    label: '30代前半',
+    counts: { male: 3_322_000, female: 3_135_000 },
+    unmarriedRatio: { male: 0.546, female: 0.416 },
+    note: '25-34歳人口を前後半に按分。未婚率は2020年国勢調査の5歳階級に寄せた近似。',
+  },
+  {
+    id: 'late30s',
+    label: '30代後半',
+    counts: { male: 3_690_000, female: 3_561_000 },
+    unmarriedRatio: { male: 0.41, female: 0.292 },
+    note: '35-44歳人口を前後半に按分。未婚率は2020年国勢調査の5歳階級に寄せた近似。',
+  },
+  {
+    id: 'early40s',
+    label: '40代前半',
+    counts: { male: 3_689_000, female: 3_561_000 },
+    unmarriedRatio: { male: 0.294, female: 0.18 },
+    note: '35-44歳人口を前後半に按分。未婚率は2020年国勢調査の5歳階級に寄せた近似。',
+  },
+  {
+    id: 'late40s',
+    label: '40代後半',
     counts: { male: 4_431_000, female: 4_313_000 },
     unmarriedRatio: { male: 0.299, female: 0.192 },
     note: '人口は人口推計2024年の45-49歳。未婚率は2020年国勢調査の45-49歳を使用。',

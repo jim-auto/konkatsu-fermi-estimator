@@ -1,5 +1,5 @@
 import {
-  ageRanges,
+  ageBuckets,
   appearanceOptions,
   cupSizeOptions,
   experienceOptions,
@@ -25,12 +25,43 @@ function findById<TId extends string>(options: RatioOption<TId>[], id: TId): Rat
   return option;
 }
 
-function getAgeRange(id: FilterState['common']['ageRange']) {
-  const ageRange = ageRanges.find((item) => item.id === id);
-  if (!ageRange) {
-    throw new Error(`Unknown age range: ${id}`);
+function getAgeBucketIndex(id: FilterState['common']['ageFrom']): number {
+  const index = ageBuckets.findIndex((item) => item.id === id);
+  if (index < 0) {
+    throw new Error(`Unknown age bucket: ${id}`);
   }
-  return ageRange;
+  return index;
+}
+
+function getSelectedAgeRange(input: FilterState) {
+  const fromIndex = getAgeBucketIndex(input.common.ageFrom);
+  const toIndex = getAgeBucketIndex(input.common.ageTo);
+  const start = Math.min(fromIndex, toIndex);
+  const end = Math.max(fromIndex, toIndex);
+  const buckets = ageBuckets.slice(start, end + 1);
+  const first = buckets[0];
+  const last = buckets[buckets.length - 1];
+  const label = first.id === last.id ? first.label : `${first.label}〜${last.label}`;
+
+  return {
+    label,
+    buckets,
+    counts: {
+      male: buckets.reduce((sum, bucket) => sum + bucket.counts.male, 0),
+      female: buckets.reduce((sum, bucket) => sum + bucket.counts.female, 0),
+    },
+    unmarriedRatio: {
+      male:
+        buckets.reduce((sum, bucket) => sum + bucket.counts.male * bucket.unmarriedRatio.male, 0) /
+        buckets.reduce((sum, bucket) => sum + bucket.counts.male, 0),
+      female:
+        buckets.reduce((sum, bucket) => sum + bucket.counts.female * bucket.unmarriedRatio.female, 0) /
+        buckets.reduce((sum, bucket) => sum + bucket.counts.female, 0),
+    },
+    note: buckets.length === 1
+      ? first.note
+      : '選択した年齢帯の人口を合算し、未婚率は人口で加重平均する。',
+  };
 }
 
 function getRarity(finalCount: number, ratio: number): Pick<EstimationResult, 'rarityLabel' | 'rarityTone'> {
@@ -74,7 +105,7 @@ function appendStep(
 export function estimatePopulation(input: FilterState, targetGender = input.targetGender): EstimationResult {
   const basePopulation = population[targetGender];
   const targetLabel = targetLabels[targetGender];
-  const ageRange = getAgeRange(input.common.ageRange);
+  const ageRange = getSelectedAgeRange(input);
   const steps: EstimationStep[] = [
     {
       id: 'base',
@@ -196,7 +227,8 @@ export function getAverageScenario(current: FilterState): FilterState {
       height: true,
     },
     common: {
-      ageRange: 'around20',
+      ageFrom: 'lateTeens',
+      ageTo: 'early20s',
       location: 'urban',
     },
     female: {
@@ -228,7 +260,8 @@ export function getExtremeMaleScenario(): FilterState {
       height: true,
     },
     common: {
-      ageRange: 'around20',
+      ageFrom: 'lateTeens',
+      ageTo: 'early20s',
       location: 'urban',
     },
     female: {
@@ -250,7 +283,8 @@ export function getExtremeFemaleScenario(): FilterState {
     targetGender: 'female',
     compareMode: true,
     common: {
-      ageRange: 'around20',
+      ageFrom: 'lateTeens',
+      ageTo: 'early20s',
       location: 'urban',
     },
     female: {
