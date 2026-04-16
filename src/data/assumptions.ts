@@ -80,11 +80,11 @@ export const locationOptions: RatioOption<LocationId>[] = [
 ];
 
 export const appearanceOptions: RatioOption<AppearanceId>[] = [
-  { id: 'top50', label: '外見 上位50%', ratio: 0.5, note: '主観評価を順位で扱う。' },
-  { id: 'top30', label: '外見 上位30%', ratio: 0.3, note: '写真で良い印象を持つ層を広めに仮定。' },
-  { id: 'top20', label: '外見 上位20%', ratio: 0.2, note: '多くの人が魅力的と感じる層。' },
-  { id: 'top10', label: '外見 上位10%', ratio: 0.1, note: '人気会員として競争が強い層。' },
-  { id: 'top5', label: '外見 上位5%', ratio: 0.05, note: 'かなり希少な見た目条件。' },
+  { id: 'score50', label: '外見偏差値50以上', ratio: 0.5, note: '主観評価を偏差値風に換算。正規分布なら上位50%。' },
+  { id: 'score55', label: '外見偏差値55以上', ratio: 0.31, note: '主観評価を偏差値風に換算。正規分布なら上位約31%。' },
+  { id: 'score60', label: '外見偏差値60以上', ratio: 0.16, note: '主観評価を偏差値風に換算。正規分布なら上位約16%。' },
+  { id: 'score63', label: '外見偏差値63以上', ratio: 0.1, note: '主観評価を偏差値風に換算。正規分布なら上位約10%。' },
+  { id: 'score67', label: '外見偏差値67以上', ratio: 0.05, note: '主観評価を偏差値風に換算。正規分布なら上位約5%。' },
 ];
 
 export const specValueOptions: RatioOption<SpecValueId>[] = [

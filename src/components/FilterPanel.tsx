@@ -130,8 +130,8 @@ export function FilterPanel({
           <ConditionRow
             conditionId="appearance"
             enabled={filters.enabled.appearance}
-            title="外見レベル"
-            description="主観評価を上位割合として扱う"
+            title="外見偏差値"
+            description="主観評価を偏差値風に換算して絞る"
             value={filters.female.appearance}
             options={appearanceOptions}
             onToggle={toggleCondition}

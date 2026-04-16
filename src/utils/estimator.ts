@@ -200,7 +200,7 @@ export function getAverageScenario(current: FilterState): FilterState {
       location: 'urban',
     },
     female: {
-      appearance: 'top50',
+      appearance: 'score50',
       specValue: 'over90',
       cupSize: 'c',
       experience: 'threeToFive',
@@ -232,7 +232,7 @@ export function getExtremeMaleScenario(): FilterState {
       location: 'urban',
     },
     female: {
-      appearance: 'top10',
+      appearance: 'score63',
       specValue: 'over105',
       cupSize: 'e',
       experience: 'none',
@@ -254,7 +254,7 @@ export function getExtremeFemaleScenario(): FilterState {
       location: 'urban',
     },
     female: {
-      appearance: 'top10',
+      appearance: 'score63',
       specValue: 'over105',
       cupSize: 'e',
       experience: 'none',
