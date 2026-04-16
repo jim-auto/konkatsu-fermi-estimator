@@ -83,7 +83,7 @@ h1 {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(360px, 440px) minmax(0, 1fr);
+  grid-template-columns: minmax(560px, 640px) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -181,6 +181,7 @@ h1 {
 
 .condition-group {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   padding-top: 18px;
   border-top: 1px solid var(--border);
@@ -191,6 +192,7 @@ h1 {
 }
 
 .condition-group h3 {
+  grid-column: 1 / -1;
   font-size: 0.95rem;
 }
 
@@ -540,6 +542,10 @@ select:disabled {
 
   .condition-row {
     grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .condition-group {
+    grid-template-columns: 1fr;
   }
 
   .condition-control {
