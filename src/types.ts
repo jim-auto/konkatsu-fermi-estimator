@@ -8,7 +8,7 @@ export type FemaleConditionId =
   | 'cupSize'
   | 'experience';
 
-export type MaleConditionId = 'income' | 'height';
+export type MaleConditionId = 'appearance' | 'specValue' | 'education' | 'income' | 'height';
 
 export type ConditionId = CommonConditionId | FemaleConditionId | MaleConditionId;
 
@@ -31,6 +31,12 @@ export type ExperienceId =
   | 'sixToTen'
   | 'elevenToTwenty'
   | 'twentyOnePlus';
+export type EducationId =
+  | 'highSchoolOrMore'
+  | 'vocationalOrJuniorCollegeOrMore'
+  | 'universityOrMore'
+  | 'graduateSchoolOrMore'
+  | 'topUniversityOrMore';
 export type IncomeId = 'over400' | 'over600' | 'over800' | 'over1000' | 'over1200';
 export type HeightId = 'over165' | 'over170' | 'over175' | 'over180';
 
@@ -52,6 +58,9 @@ export interface FilterState {
     experience: ExperienceId;
   };
   male: {
+    appearance: AppearanceId;
+    specValue: SpecValueId;
+    education: EducationId;
     income: IncomeId;
     height: HeightId;
   };

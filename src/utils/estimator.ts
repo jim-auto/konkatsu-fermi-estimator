@@ -2,7 +2,9 @@ import {
   ageBuckets,
   appearanceOptions,
   cupSizeOptions,
+  educationOptions,
   experienceOptions,
+  faceScoreOptions,
   heightOptions,
   incomeOptions,
   locationOptions,
@@ -161,6 +163,18 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
   }
 
   if (targetGender === 'male') {
+    if (input.enabled.appearance) {
+      const option = findById(faceScoreOptions, input.male.appearance);
+      appendStep(steps, 'appearance', option.label, option.ratio, option.note);
+    }
+    if (input.enabled.specValue) {
+      const option = findById(specValueOptions, input.male.specValue);
+      appendStep(steps, 'specValue', option.label, option.ratio, option.note);
+    }
+    if (input.enabled.education) {
+      const option = findById(educationOptions, input.male.education);
+      appendStep(steps, 'education', option.label, option.ratio, option.note);
+    }
     if (input.enabled.income) {
       const option = findById(incomeOptions, input.male.income);
       appendStep(steps, 'income', option.label, option.ratio, option.note);
@@ -223,6 +237,7 @@ export function getAverageScenario(current: FilterState): FilterState {
       specValue: true,
       cupSize: true,
       experience: true,
+      education: true,
       income: true,
       height: true,
     },
@@ -238,6 +253,9 @@ export function getAverageScenario(current: FilterState): FilterState {
       experience: 'threeToFive',
     },
     male: {
+      appearance: 'score50',
+      specValue: 'over90',
+      education: 'highSchoolOrMore',
       income: 'over400',
       height: 'over170',
     },
@@ -256,6 +274,7 @@ export function getExtremeMaleScenario(): FilterState {
       specValue: true,
       cupSize: true,
       experience: true,
+      education: true,
       income: true,
       height: true,
     },
@@ -271,6 +290,9 @@ export function getExtremeMaleScenario(): FilterState {
       experience: 'none',
     },
     male: {
+      appearance: 'score65',
+      specValue: 'over105',
+      education: 'universityOrMore',
       income: 'over800',
       height: 'over175',
     },

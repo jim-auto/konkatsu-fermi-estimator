@@ -2,6 +2,7 @@ import type {
   AgeBucketId,
   AppearanceId,
   CupSizeId,
+  EducationId,
   ExperienceId,
   HeightId,
   IncomeId,
@@ -108,6 +109,11 @@ export const appearanceOptions: RatioOption<AppearanceId>[] = [
   { id: 'score70', label: '外見偏差値70以上', ratio: 0.02, note: '主観評価を偏差値風に換算。正規分布なら上位約2%。' },
 ];
 
+export const faceScoreOptions: RatioOption<AppearanceId>[] = appearanceOptions.map((option) => ({
+  ...option,
+  label: option.label.replace('外見偏差値', '顔面偏差値'),
+}));
+
 export const specValueOptions: RatioOption<SpecValueId>[] = [
   { id: 'over90', label: 'スペ値90以上', ratio: 0.78, note: '身長(cm)-体重(kg)。国民健康・栄養調査の身長・体重分布を参考に広めに置く。' },
   { id: 'over100', label: 'スペ値100以上', ratio: 0.52, note: '美容・婚活文脈でよく使われる目安。実統計ではなく近似。' },
@@ -115,6 +121,14 @@ export const specValueOptions: RatioOption<SpecValueId>[] = [
   { id: 'over110', label: 'スペ値110以上', ratio: 0.15, note: 'かなり細身の条件として扱う。' },
   { id: 'over115', label: 'スペ値115以上', ratio: 0.07, note: 'モデル体型寄りの強い条件として扱う。' },
   { id: 'over120', label: 'スペ値120以上', ratio: 0.03, note: 'かなり希少なスペ値条件として扱う。' },
+];
+
+export const educationOptions: RatioOption<EducationId>[] = [
+  { id: 'highSchoolOrMore', label: '高卒以上', ratio: 0.94, note: '最終学歴分布を婚活条件向けに丸めた仮定。年齢差は単純化。' },
+  { id: 'vocationalOrJuniorCollegeOrMore', label: '専門・短大以上', ratio: 0.72, note: '専門学校・短大・高専・大学以上を含むざっくり仮定。' },
+  { id: 'universityOrMore', label: '大卒以上', ratio: 0.52, note: '大学・大学院卒を合わせた近似。年齢帯による差は未補正。' },
+  { id: 'graduateSchoolOrMore', label: '院卒以上', ratio: 0.08, note: '大学院修了者をかなり粗く置いた仮定。' },
+  { id: 'topUniversityOrMore', label: '難関大卒以上', ratio: 0.06, note: '学校群の定義に強く依存する、エンタメ寄りの仮定。' },
 ];
 
 export const cupSizeOptions: RatioOption<CupSizeId>[] = [

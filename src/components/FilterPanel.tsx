@@ -3,7 +3,9 @@ import {
   ageBuckets,
   appearanceOptions,
   cupSizeOptions,
+  educationOptions,
   experienceOptions,
+  faceScoreOptions,
   heightOptions,
   incomeOptions,
   locationOptions,
@@ -246,6 +248,51 @@ export function FilterPanel({
       ) : (
         <div className="condition-group">
           <h3>男性対象の条件</h3>
+          <ConditionRow
+            conditionId="appearance"
+            enabled={filters.enabled.appearance}
+            title="顔面偏差値"
+            description="主観評価を偏差値風に換算して絞る"
+            value={filters.male.appearance}
+            options={faceScoreOptions}
+            onToggle={toggleCondition}
+            onChange={(appearance) =>
+              setFilters((current) => ({
+                ...current,
+                male: { ...current.male, appearance },
+              }))
+            }
+          />
+          <ConditionRow
+            conditionId="specValue"
+            enabled={filters.enabled.specValue}
+            title="スペ値"
+            description="身長(cm) - 体重(kg) の値で絞る"
+            value={filters.male.specValue}
+            options={specValueOptions}
+            onToggle={toggleCondition}
+            onChange={(specValue) =>
+              setFilters((current) => ({
+                ...current,
+                male: { ...current.male, specValue },
+              }))
+            }
+          />
+          <ConditionRow
+            conditionId="education"
+            enabled={filters.enabled.education}
+            title="学歴"
+            description="最終学歴や学校群をざっくり仮定して絞る"
+            value={filters.male.education}
+            options={educationOptions}
+            onToggle={toggleCondition}
+            onChange={(education) =>
+              setFilters((current) => ({
+                ...current,
+                male: { ...current.male, education },
+              }))
+            }
+          />
           <ConditionRow
             conditionId="income"
             enabled={filters.enabled.income}
