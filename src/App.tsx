@@ -24,10 +24,10 @@ export default function App() {
       <header className="app-header">
         <div>
           <p className="eyebrow">Konkatsu Fermi Estimator</p>
-          <h1>フェルミ推定で理想の相手は何人いるのか</h1>
+          <h1>理想の相手、何人残る？</h1>
         </div>
         <p>
-          日本人口を起点に、条件ごとの割合を掛け合わせるフェルミ推定です。数値は統計の厳密値ではなく、母集団が減る感覚をつかむための仮定です。
+          日本人口を起点に、条件ごとの割合を掛け合わせるフェルミ推定です。条件を増やすほど、母集団がどれだけ削られるかを可視化します。
         </p>
       </header>
 
