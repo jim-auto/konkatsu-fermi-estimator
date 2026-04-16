@@ -22,7 +22,7 @@ export type AgeBucketId =
   | 'late40s';
 export type LocationId = 'urban' | 'regional';
 export type AppearanceId = 'score50' | 'score55' | 'score60' | 'score65' | 'score70';
-export type SpecValueId = 'over90' | 'over100' | 'over105' | 'over110';
+export type SpecValueId = 'over90' | 'over100' | 'over105' | 'over110' | 'over115' | 'over120';
 export type CupSizeId = 'aToB' | 'c' | 'd' | 'e' | 'f' | 'g' | 'hOrMore';
 export type ExperienceId =
   | 'none'

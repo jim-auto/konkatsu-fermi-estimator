@@ -113,6 +113,8 @@ export const specValueOptions: RatioOption<SpecValueId>[] = [
   { id: 'over100', label: 'スペ値100以上', ratio: 0.52, note: '美容・婚活文脈でよく使われる目安。実統計ではなく近似。' },
   { id: 'over105', label: 'スペ値105以上', ratio: 0.32, note: '細身寄りの条件として強めに絞る。' },
   { id: 'over110', label: 'スペ値110以上', ratio: 0.15, note: 'かなり細身の条件として扱う。' },
+  { id: 'over115', label: 'スペ値115以上', ratio: 0.07, note: 'モデル体型寄りの強い条件として扱う。' },
+  { id: 'over120', label: 'スペ値120以上', ratio: 0.03, note: 'かなり希少なスペ値条件として扱う。' },
 ];
 
 export const cupSizeOptions: RatioOption<CupSizeId>[] = [
