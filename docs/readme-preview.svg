@@ -1,0 +1,70 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Konkatsu Fermi Estimator preview</title>
+  <desc id="desc">A preview card showing a Fermi estimation dashboard for dating conditions.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#1A2744" flood-opacity="0.14"/>
+    </filter>
+    <linearGradient id="line" x1="425" y1="232" x2="1002" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E7C7B"/>
+      <stop offset="0.52" stop-color="#2364AA"/>
+      <stop offset="1" stop-color="#D1495B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#F5F7FB"/>
+  <rect x="44" y="38" width="1112" height="554" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+
+  <g transform="translate(84 82)">
+    <text x="0" y="0" fill="#0E7C7B" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="800">KONKATSU FERMI ESTIMATOR</text>
+    <text x="0" y="68" fill="#111827" font-family="Inter, Segoe UI, sans-serif" font-size="58" font-weight="850">How rare is your ideal partner?</text>
+    <text x="0" y="114" fill="#657083" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="600">Conditions multiply. The population disappears fast.</text>
+  </g>
+
+  <g transform="translate(84 238)">
+    <rect x="0" y="0" width="270" height="252" rx="16" fill="#F8FAFC" stroke="#D8DEE8"/>
+    <text x="24" y="42" fill="#657083" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="800">CURRENT ESTIMATE</text>
+    <text x="24" y="112" fill="#111827" font-family="Inter, Segoe UI, sans-serif" font-size="62" font-weight="900">5,900</text>
+    <text x="24" y="148" fill="#657083" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="700">people left</text>
+    <rect x="24" y="176" width="185" height="38" rx="8" fill="#D1495B"/>
+    <text x="42" y="202" fill="#FFFFFF" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="850">SSR rarity</text>
+  </g>
+
+  <g transform="translate(394 190)">
+    <rect x="0" y="0" width="696" height="300" rx="18" fill="#FFFFFF" stroke="#D8DEE8"/>
+    <text x="28" y="45" fill="#111827" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="850">Population funnel</text>
+    <text x="510" y="45" fill="#657083" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="750">log scale</text>
+
+    <line x1="52" y1="234" x2="642" y2="234" stroke="#D8DEE8" stroke-width="2"/>
+    <line x1="52" y1="178" x2="642" y2="178" stroke="#E8EDF4" stroke-width="2"/>
+    <line x1="52" y1="122" x2="642" y2="122" stroke="#E8EDF4" stroke-width="2"/>
+    <line x1="52" y1="66" x2="642" y2="66" stroke="#E8EDF4" stroke-width="2"/>
+
+    <path d="M66 68 C142 82 170 110 226 122 C286 136 330 168 386 184 C448 202 500 220 628 234" stroke="url(#line)" stroke-width="8" stroke-linecap="round"/>
+
+    <g fill="#FFFFFF" stroke="#D1495B" stroke-width="5">
+      <circle cx="66" cy="68" r="9"/>
+      <circle cx="226" cy="122" r="9"/>
+      <circle cx="386" cy="184" r="9"/>
+      <circle cx="628" cy="234" r="9"/>
+    </g>
+
+    <g font-family="Inter, Segoe UI, sans-serif" font-size="16" font-weight="750" fill="#657083">
+      <text x="44" y="270">Japan</text>
+      <text x="178" y="270">Age</text>
+      <text x="325" y="270">Income</text>
+      <text x="540" y="270">All filters</text>
+    </g>
+  </g>
+
+  <g transform="translate(394 516)">
+    <rect x="0" y="0" width="124" height="38" rx="8" fill="#EEF7F6" stroke="#B8DEDA"/>
+    <text x="18" y="25" fill="#0E7C7B" font-family="Inter, Segoe UI, sans-serif" font-size="16" font-weight="850">Urban</text>
+    <rect x="136" y="0" width="144" height="38" rx="8" fill="#F3F6FB" stroke="#C9D5E6"/>
+    <text x="154" y="25" fill="#2364AA" font-family="Inter, Segoe UI, sans-serif" font-size="16" font-weight="850">Unmarried</text>
+    <rect x="292" y="0" width="154" height="38" rx="8" fill="#FFF8E7" stroke="#F0D48A"/>
+    <text x="310" y="25" fill="#8B5D00" font-family="Inter, Segoe UI, sans-serif" font-size="16" font-weight="850">Income 8M+</text>
+    <rect x="458" y="0" width="152" height="38" rx="8" fill="#FCECEF" stroke="#F2B7C0"/>
+    <text x="476" y="25" fill="#D1495B" font-family="Inter, Segoe UI, sans-serif" font-size="16" font-weight="850">Height 175+</text>
+  </g>
+</svg>
