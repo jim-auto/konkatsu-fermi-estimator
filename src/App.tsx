@@ -26,9 +26,14 @@ export default function App() {
           <p className="eyebrow">フェルミ推定で母集団を可視化</p>
           <h1>恋人条件シミュレーター</h1>
         </div>
-        <p>
-          条件を重ねるほど、候補は何人残るのか。日本人口を起点に、フェルミ推定で恋人候補の母集団を可視化します。
-        </p>
+        <div className="header-copy">
+          <p>
+            条件を重ねるほど、候補は何人残るのか。日本人口を起点に、フェルミ推定で恋人候補の母集団を可視化します。
+          </p>
+          <p className="fact-note">
+            公的統計を参考にした近似です。外見偏差値・カップ数・経験人数などはエンタメ寄りの仮定として扱います。
+          </p>
+        </div>
       </header>
 
       <div className="workspace">

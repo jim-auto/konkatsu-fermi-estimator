@@ -74,11 +74,27 @@ h1 {
   letter-spacing: 0;
 }
 
-.app-header p:last-child {
+.header-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.header-copy p {
   margin: 0;
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.75;
+}
+
+.header-copy .fact-note {
+  padding: 10px 12px;
+  border: 1px solid #dbe8e6;
+  border-radius: 8px;
+  background: #eef7f6;
+  color: #245d5b;
+  font-size: 0.9rem;
+  font-weight: 750;
+  line-height: 1.6;
 }
 
 .workspace {

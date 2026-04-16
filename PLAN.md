@@ -76,6 +76,7 @@ docs/
   assumptions.md
   data-sources.md
   experiments.md
+  fact-check.md
   readme-preview.svg
 .github/
   workflows/
@@ -95,6 +96,7 @@ PLAN.md
 - 上部ラベル: `フェルミ推定で母集団を可視化`
 - H1: `恋人条件シミュレーター`
 - サブコピーでフェルミ推定を説明
+- 公的統計ベースの近似とエンタメ寄り仮定が混在することを注意書きで明示
 
 H1 はプロダクト名にして、フェルミ推定はサブコピーで説明する方針です。
 以前の `理想の相手、何人残る？` より、初見で機能が伝わる `恋人条件シミュレーター` を採用しています。
@@ -287,6 +289,7 @@ export interface FilterState {
 
 すべて `src/data/assumptions.ts` に集約されています。  
 ドキュメント側は `docs/assumptions.md` に対応表があります。
+係数ごとのファクトチェック状況は `docs/fact-check.md` に分離しています。
 
 ### 7.1 基本人口
 
