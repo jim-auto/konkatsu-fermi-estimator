@@ -18,9 +18,9 @@ import type {
 } from '../types';
 
 export const population = {
-  japan: 124_000_000,
-  male: 60_500_000,
-  female: 63_500_000,
+  japan: 123_802_000,
+  male: 60_233_000,
+  female: 63_569_000,
 } as const;
 
 export const targetLabels: Record<TargetGender, string> = {
@@ -43,37 +43,37 @@ export const ageRanges: Array<{
   {
     id: '20-29',
     label: '20-29歳',
-    counts: { male: 6_300_000, female: 6_100_000 },
-    unmarriedRatio: { male: 0.82, female: 0.76 },
-    note: '20代全体。婚活初期層を広めに見る仮定。',
+    counts: { male: 6_587_000, female: 6_192_000 },
+    unmarriedRatio: { male: 0.86, female: 0.794 },
+    note: '人口は人口推計2024年、未婚率は2020年国勢調査の20-24歳/25-29歳を加重平均。',
   },
   {
     id: '25-34',
     label: '25-34歳',
-    counts: { male: 6_600_000, female: 6_400_000 },
-    unmarriedRatio: { male: 0.58, female: 0.47 },
-    note: '20代後半から30代前半。相談所・アプリでよく指定される範囲。',
+    counts: { male: 6_644_000, female: 6_270_000 },
+    unmarriedRatio: { male: 0.638, female: 0.518 },
+    note: '人口は人口推計2024年、未婚率は2020年国勢調査の25-29歳/30-34歳を加重平均。',
   },
   {
     id: '30-39',
     label: '30-39歳',
-    counts: { male: 7_000_000, female: 6_800_000 },
-    unmarriedRatio: { male: 0.41, female: 0.3 },
-    note: '30代。未婚率は年齢上昇により大きく下がる前提。',
+    counts: { male: 6_797_000, female: 6_469_000 },
+    unmarriedRatio: { male: 0.448, female: 0.32 },
+    note: '人口は人口推計2024年、未婚率は2020年国勢調査の30-34歳/35-39歳を加重平均。',
   },
   {
     id: '35-44',
     label: '35-44歳',
-    counts: { male: 7_500_000, female: 7_300_000 },
-    unmarriedRatio: { male: 0.32, female: 0.23 },
-    note: '30代後半から40代前半。婚歴や子供条件の影響が増える層。',
+    counts: { male: 7_379_000, female: 7_122_000 },
+    unmarriedRatio: { male: 0.352, female: 0.236 },
+    note: '人口は人口推計2024年、未婚率は2020年国勢調査の35-39歳/40-44歳を加重平均。',
   },
   {
     id: '40-49',
     label: '40-49歳',
-    counts: { male: 8_100_000, female: 7_900_000 },
-    unmarriedRatio: { male: 0.26, female: 0.19 },
-    note: '40代。初婚だけに絞ると母集団がさらに減る前提。',
+    counts: { male: 8_301_000, female: 8_073_000 },
+    unmarriedRatio: { male: 0.31, female: 0.202 },
+    note: '人口は人口推計2024年、未婚率は2020年国勢調査の40-44歳/45-49歳を加重平均。',
   },
 ];
 
@@ -101,9 +101,9 @@ export const appearanceOptions: RatioOption<AppearanceId>[] = [
 ];
 
 export const bodyTypeOptions: RatioOption<BodyTypeId>[] = [
-  { id: 'standardOrSlim', label: '標準-細身', ratio: 0.58, note: 'BMI標準域と細身を合わせた推定。' },
-  { id: 'slim', label: '細身', ratio: 0.33, note: '細身寄りに限定する仮定。' },
-  { id: 'fitness', label: '運動習慣あり', ratio: 0.16, note: '体型維持に積極的な層として狭める。' },
+  { id: 'standardOrSlim', label: '標準-細身', ratio: 0.83, note: '国民健康・栄養調査の若年女性BMIから、肥満ではない層を広めに置く。' },
+  { id: 'slim', label: '細身', ratio: 0.32, note: '若年女性のやせ/BMI20以下に近い層として置く。' },
+  { id: 'fitness', label: '運動習慣あり', ratio: 0.16, note: '運動習慣は婚活向け主観条件として仮定を残す。' },
 ];
 
 export const cupSizeOptions: RatioOption<CupSizeId>[] = [
@@ -114,9 +114,9 @@ export const cupSizeOptions: RatioOption<CupSizeId>[] = [
 ];
 
 export const femaleEducationOptions: RatioOption<FemaleEducationId>[] = [
-  { id: 'college', label: '大卒以上', ratio: 0.52, note: '女性の大学・大学院卒を半数強に置く。' },
-  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.1, note: '大学群をさらに絞る仮定。' },
-  { id: 'graduate', label: '大学院卒', ratio: 0.06, note: '修士・博士まで限定。' },
+  { id: 'college', label: '大卒以上', ratio: 0.42, note: '2020年国勢調査の若年層最終学歴を参考に大学・大学院卒を置く。' },
+  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.1, note: '公式統計では大学群を分けにくいため仮定。' },
+  { id: 'graduate', label: '大学院卒', ratio: 0.06, note: '学校基本調査の男女差を参考に、女性大学院卒を狭めに置く。' },
 ];
 
 export const femaleEmploymentOptions: RatioOption<FemaleEmploymentId>[] = [
@@ -145,24 +145,24 @@ export const experienceOptions: RatioOption<ExperienceId>[] = [
 ];
 
 export const incomeOptions: RatioOption<IncomeId>[] = [
-  { id: 'over400', label: '年収400万以上', ratio: 0.62, note: '正社員男性を中心に広めに残す。' },
-  { id: 'over600', label: '年収600万以上', ratio: 0.32, note: '全国では明確に上位寄り。' },
-  { id: 'over800', label: '年収800万以上', ratio: 0.14, note: '婚活でよく見るがかなり狭い条件。' },
-  { id: 'over1000', label: '年収1000万以上', ratio: 0.06, note: '上位数%から1割弱として扱う。' },
-  { id: 'over1200', label: '年収1200万以上', ratio: 0.03, note: '都市部でも希少な高年収層。' },
+  { id: 'over400', label: '年収400万以上', ratio: 0.679, note: '国税庁2024年民間給与実態統計の男性・1年通じて勤務した給与所得者ベース。' },
+  { id: 'over600', label: '年収600万以上', ratio: 0.363, note: '国税庁2024年民間給与実態統計の男性給与階級から算出。' },
+  { id: 'over800', label: '年収800万以上', ratio: 0.184, note: '国税庁2024年民間給与実態統計の男性給与階級から算出。' },
+  { id: 'over1000', label: '年収1000万以上', ratio: 0.098, note: '国税庁2024年民間給与実態統計の男性給与階級から算出。' },
+  { id: 'over1200', label: '年収1200万以上', ratio: 0.07, note: '1000-1500万円階級内を線形補間した推定。' },
 ];
 
 export const heightOptions: RatioOption<HeightId>[] = [
-  { id: 'over165', label: '身長165cm以上', ratio: 0.78, note: '男性の平均身長より少し低め以上。' },
-  { id: 'over170', label: '身長170cm以上', ratio: 0.54, note: '平均付近以上。' },
-  { id: 'over175', label: '身長175cm以上', ratio: 0.26, note: '上位約4分の1として扱う。' },
-  { id: 'over180', label: '身長180cm以上', ratio: 0.07, note: 'かなり背が高い層。' },
+  { id: 'over165', label: '身長165cm以上', ratio: 0.88, note: '国民健康・栄養調査の男性平均身長・標準偏差から正規近似。' },
+  { id: 'over170', label: '身長170cm以上', ratio: 0.61, note: '男性20-40代の平均身長171cm台を基準に正規近似。' },
+  { id: 'over175', label: '身長175cm以上', ratio: 0.27, note: '男性身長分布の上位3割弱として正規近似。' },
+  { id: 'over180', label: '身長180cm以上', ratio: 0.06, note: '男性身長分布の上位数%として正規近似。' },
 ];
 
 export const educationOptions: RatioOption<EducationId>[] = [
-  { id: 'college', label: '大卒以上', ratio: 0.48, note: '大学・大学院卒を半数弱に置く。' },
-  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.12, note: '大学群をさらに絞る仮定。' },
-  { id: 'graduate', label: '大学院卒', ratio: 0.09, note: '修士・博士まで限定。' },
+  { id: 'college', label: '大卒以上', ratio: 0.46, note: '2020年国勢調査の若年層最終学歴を参考に大学・大学院卒を置く。' },
+  { id: 'selectiveCollege', label: '難関大以上', ratio: 0.12, note: '公式統計では大学群を分けにくいため仮定。' },
+  { id: 'graduate', label: '大学院卒', ratio: 0.09, note: '学校基本調査の大学院進学率・男女差を参考に置く。' },
 ];
 
 export const maleOccupationOptions: RatioOption<MaleOccupationId>[] = [
