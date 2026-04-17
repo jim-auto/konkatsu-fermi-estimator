@@ -66,6 +66,35 @@ function getSelectedAgeRange(input: FilterState) {
   };
 }
 
+function getExperienceOptionIndex(id: FilterState['female']['experienceFrom']): number {
+  const index = experienceOptions.findIndex((item) => item.id === id);
+  if (index < 0) {
+    throw new Error(`Unknown experience option: ${id}`);
+  }
+  return index;
+}
+
+function getSelectedExperienceRange(input: FilterState) {
+  const fromIndex = getExperienceOptionIndex(input.female.experienceFrom);
+  const toIndex = getExperienceOptionIndex(input.female.experienceTo);
+  const start = Math.min(fromIndex, toIndex);
+  const end = Math.max(fromIndex, toIndex);
+  const options = experienceOptions.slice(start, end + 1);
+  const first = options[0];
+  const last = options[options.length - 1];
+  const label =
+    first.id === last.id ? first.label : `経験人数 ${first.rangeStartLabel}〜${last.rangeEndLabel}`;
+
+  return {
+    label,
+    ratio: options.reduce((sum, option) => sum + option.ratio, 0),
+    note:
+      options.length === 1
+        ? first.note
+        : '選択した経験人数レンジの仮定割合を合算する。自己申告バイアスが大きい条件。',
+  };
+}
+
 function getRarity(finalCount: number, ratio: number): Pick<EstimationResult, 'rarityLabel' | 'rarityTone'> {
   const percent = ratio * 100;
 
@@ -157,8 +186,8 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
       appendStep(steps, 'cupSize', option.label, option.ratio, option.note);
     }
     if (input.enabled.experience) {
-      const option = findById(experienceOptions, input.female.experience);
-      appendStep(steps, 'experience', option.label, option.ratio, option.note);
+      const range = getSelectedExperienceRange(input);
+      appendStep(steps, 'experience', range.label, range.ratio, range.note);
     }
   }
 
@@ -250,7 +279,8 @@ export function getAverageScenario(current: FilterState): FilterState {
       appearance: 'score50',
       specValue: 'over90',
       cupSize: 'c',
-      experience: 'threeToFive',
+      experienceFrom: 'threeToFive',
+      experienceTo: 'threeToFive',
     },
     male: {
       appearance: 'score50',
@@ -287,7 +317,8 @@ export function getExtremeMaleScenario(): FilterState {
       appearance: 'score65',
       specValue: 'over105',
       cupSize: 'e',
-      experience: 'none',
+      experienceFrom: 'none',
+      experienceTo: 'none',
     },
     male: {
       appearance: 'score65',
@@ -313,7 +344,8 @@ export function getExtremeFemaleScenario(): FilterState {
       appearance: 'score65',
       specValue: 'over105',
       cupSize: 'e',
-      experience: 'none',
+      experienceFrom: 'none',
+      experienceTo: 'none',
     },
   };
 }

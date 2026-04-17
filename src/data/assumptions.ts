@@ -141,13 +141,67 @@ export const cupSizeOptions: RatioOption<CupSizeId>[] = [
   { id: 'hOrMore', label: 'Hカップ以上', ratio: 0.01, note: 'かなり希少な自己申告条件として扱う。' },
 ];
 
-export const experienceOptions: RatioOption<ExperienceId>[] = [
-  { id: 'none', label: '経験人数 0人', ratio: 0.1, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
-  { id: 'oneToTwo', label: '経験人数 1-2人', ratio: 0.22, note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。' },
-  { id: 'threeToFive', label: '経験人数 3-5人', ratio: 0.28, note: 'ボリュームゾーン寄りの範囲として置く。' },
-  { id: 'sixToTen', label: '経験人数 6-10人', ratio: 0.2, note: 'やや多めの経験レンジとして絞る。' },
-  { id: 'elevenToTwenty', label: '経験人数 11-20人', ratio: 0.12, note: '多めの経験レンジとしてさらに絞る。' },
-  { id: 'twentyOnePlus', label: '経験人数 21人以上', ratio: 0.08, note: 'かなり多めの経験レンジとして扱う。' },
+export const experienceOptions: Array<
+  RatioOption<ExperienceId> & {
+    shortLabel: string;
+    rangeStartLabel: string;
+    rangeEndLabel: string;
+  }
+> = [
+  {
+    id: 'none',
+    label: '経験人数 0人',
+    shortLabel: '0人',
+    rangeStartLabel: '0人',
+    rangeEndLabel: '0人',
+    ratio: 0.1,
+    note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。',
+  },
+  {
+    id: 'oneToTwo',
+    label: '経験人数 1-2人',
+    shortLabel: '1-2人',
+    rangeStartLabel: '1人',
+    rangeEndLabel: '2人',
+    ratio: 0.22,
+    note: '自己申告前提のセンシティブ条件。かなり不確実な仮定。',
+  },
+  {
+    id: 'threeToFive',
+    label: '経験人数 3-5人',
+    shortLabel: '3-5人',
+    rangeStartLabel: '3人',
+    rangeEndLabel: '5人',
+    ratio: 0.28,
+    note: 'ボリュームゾーン寄りの範囲として置く。',
+  },
+  {
+    id: 'sixToTen',
+    label: '経験人数 6-10人',
+    shortLabel: '6-10人',
+    rangeStartLabel: '6人',
+    rangeEndLabel: '10人',
+    ratio: 0.2,
+    note: 'やや多めの経験レンジとして絞る。',
+  },
+  {
+    id: 'elevenToTwenty',
+    label: '経験人数 11-20人',
+    shortLabel: '11-20人',
+    rangeStartLabel: '11人',
+    rangeEndLabel: '20人',
+    ratio: 0.12,
+    note: '多めの経験レンジとしてさらに絞る。',
+  },
+  {
+    id: 'twentyOnePlus',
+    label: '経験人数 21人以上',
+    shortLabel: '21人以上',
+    rangeStartLabel: '21人',
+    rangeEndLabel: '21人以上',
+    ratio: 0.08,
+    note: 'かなり多めの経験レンジとして扱う。',
+  },
 ];
 
 export const incomeOptions: RatioOption<IncomeId>[] = [

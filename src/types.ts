@@ -55,7 +55,8 @@ export interface FilterState {
     appearance: AppearanceId;
     specValue: SpecValueId;
     cupSize: CupSizeId;
-    experience: ExperienceId;
+    experienceFrom: ExperienceId;
+    experienceTo: ExperienceId;
   };
   male: {
     appearance: AppearanceId;

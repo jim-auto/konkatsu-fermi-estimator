@@ -20,6 +20,11 @@ function getAgeBucketIndex(ageBucketId: FilterState['common']['ageFrom']): numbe
   return index < 0 ? 0 : index;
 }
 
+function getExperienceOptionIndex(experienceId: FilterState['female']['experienceFrom']): number {
+  const index = experienceOptions.findIndex((item) => item.id === experienceId);
+  return index < 0 ? 0 : index;
+}
+
 interface FilterPanelProps {
   filters: FilterState;
   setFilters: Dispatch<SetStateAction<FilterState>>;
@@ -43,6 +48,8 @@ export function FilterPanel({
 }: FilterPanelProps) {
   const ageFromIndex = getAgeBucketIndex(filters.common.ageFrom);
   const ageToIndex = getAgeBucketIndex(filters.common.ageTo);
+  const experienceFromIndex = getExperienceOptionIndex(filters.female.experienceFrom);
+  const experienceToIndex = getExperienceOptionIndex(filters.female.experienceTo);
 
   return (
     <section className="panel control-panel" aria-label="条件入力">
@@ -95,7 +102,7 @@ export function FilterPanel({
           description="最小と最大の年齢帯ではさんで対象人口を残す"
           onToggle={toggleCondition}
         >
-          <div className="age-range-control">
+          <div className="range-control">
             <label>
               <span>最小</span>
               <select
@@ -153,7 +160,7 @@ export function FilterPanel({
               </select>
             </label>
           </div>
-          {ageFromIndex > ageToIndex ? <span className="age-range-hint">範囲を自動補正します</span> : null}
+          {ageFromIndex > ageToIndex ? <span className="range-hint">範囲を自動補正します</span> : null}
         </ConditionRow>
         <ConditionRow
           conditionId="unmarried"
@@ -233,17 +240,73 @@ export function FilterPanel({
             conditionId="experience"
             enabled={filters.enabled.experience}
             title="経験人数"
-            description="自己申告前提のセンシティブ条件として扱う"
-            value={filters.female.experience}
-            options={experienceOptions}
+            description="最小と最大の経験人数レンジではさんで割合を合算する"
             onToggle={toggleCondition}
-            onChange={(experience) =>
-              setFilters((current) => ({
-                ...current,
-                female: { ...current.female, experience },
-              }))
-            }
-          />
+          >
+            <div className="range-control">
+              <label>
+                <span>最小</span>
+                <select
+                  value={filters.female.experienceFrom}
+                  disabled={!filters.enabled.experience}
+                  onChange={(event) => {
+                    const experienceFrom = event.target.value as FilterState['female']['experienceFrom'];
+                    setFilters((current) => {
+                      const nextFromIndex = getExperienceOptionIndex(experienceFrom);
+                      const currentToIndex = getExperienceOptionIndex(current.female.experienceTo);
+                      return {
+                        ...current,
+                        female: {
+                          ...current.female,
+                          experienceFrom,
+                          experienceTo:
+                            currentToIndex < nextFromIndex ? experienceFrom : current.female.experienceTo,
+                        },
+                      };
+                    });
+                  }}
+                >
+                  {experienceOptions.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.shortLabel}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>最大</span>
+                <select
+                  value={filters.female.experienceTo}
+                  disabled={!filters.enabled.experience}
+                  onChange={(event) => {
+                    const experienceTo = event.target.value as FilterState['female']['experienceTo'];
+                    setFilters((current) => {
+                      const currentFromIndex = getExperienceOptionIndex(current.female.experienceFrom);
+                      const nextToIndex = getExperienceOptionIndex(experienceTo);
+                      return {
+                        ...current,
+                        female: {
+                          ...current.female,
+                          experienceFrom:
+                            nextToIndex < currentFromIndex ? experienceTo : current.female.experienceFrom,
+                          experienceTo,
+                        },
+                      };
+                    });
+                  }}
+                >
+                  {experienceOptions.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.shortLabel}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            {experienceFromIndex > experienceToIndex ? (
+              <span className="range-hint">範囲を自動補正します</span>
+            ) : null}
+          </ConditionRow>
         </div>
       ) : (
         <div className="condition-group">

@@ -268,7 +268,8 @@ export interface FilterState {
     appearance: AppearanceId;
     specValue: SpecValueId;
     cupSize: CupSizeId;
-    experience: ExperienceId;
+    experienceFrom: ExperienceId;
+    experienceTo: ExperienceId;
   };
   male: {
     appearance: AppearanceId;
@@ -374,6 +375,8 @@ F/G/H以上まで拡張済みです。
 - 6-10人: 20%
 - 11-20人: 12%
 - 21人以上: 8%
+
+UI は年齢と同じく最小/最大レンジ指定。選択範囲に含まれる上記バケットの割合を合算して掛ける。
 
 カップ数と経験人数は公的統計では弱く、自己申告バイアスも大きいので、エンタメ寄りの仮定として扱ってください。
 
