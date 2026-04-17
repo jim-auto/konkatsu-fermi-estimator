@@ -1,6 +1,7 @@
 import type {
   AgeBucketId,
   AppearanceId,
+  BinaryChoiceId,
   CupSizeId,
   EducationId,
   ExperienceId,
@@ -204,6 +205,51 @@ export const experienceOptions: Array<
   },
 ];
 
+export const nightWorkOptions: RatioOption<BinaryChoiceId>[] = [
+  {
+    id: 'no',
+    label: '夜職経験なし',
+    ratio: 0.92,
+    note: '公的統計ではなく、自己申告前提のかなり粗い仮定。',
+  },
+  {
+    id: 'yes',
+    label: '夜職経験あり',
+    ratio: 0.08,
+    note: '対象範囲の定義で大きく変わる、エンタメ寄りの仮定。',
+  },
+];
+
+export const luxuryBrandInterestOptions: RatioOption<BinaryChoiceId>[] = [
+  {
+    id: 'no',
+    label: 'ハイブラ興味なし',
+    ratio: 0.68,
+    note: '購買力ではなく興味・志向の自己申告条件として置いた仮定。',
+  },
+  {
+    id: 'yes',
+    label: 'ハイブラ興味あり',
+    ratio: 0.32,
+    note: 'ブランド関心の強さは定義が曖昧なため、エンタメ寄りの仮定。',
+  },
+];
+
+export const movedToTokyoOptions: RatioOption<BinaryChoiceId>[] = [
+  {
+    id: 'no',
+    label: '上京経験なし',
+    ratio: 0.84,
+    note: '東京圏への移住経験をざっくり扱う仮定。地域差は未補正。',
+  },
+  {
+    id: 'yes',
+    label: '上京経験あり',
+    ratio: 0.16,
+    note: '東京圏への移住経験をざっくり扱う仮定。年齢差や居住地との相関は未補正。',
+  },
+];
+
 export const incomeOptions: RatioOption<IncomeId>[] = [
   { id: 'over400', label: '年収400万以上', ratio: 0.679, note: '国税庁2024年民間給与実態統計の男性・1年通じて勤務した給与所得者ベース。' },
   { id: 'over600', label: '年収600万以上', ratio: 0.363, note: '国税庁2024年民間給与実態統計の男性給与階級から算出。' },
@@ -212,9 +258,56 @@ export const incomeOptions: RatioOption<IncomeId>[] = [
   { id: 'over1200', label: '年収1200万以上', ratio: 0.07, note: '1000-1500万円階級内を線形補間した推定。' },
 ];
 
-export const heightOptions: RatioOption<HeightId>[] = [
-  { id: 'over165', label: '身長165cm以上', ratio: 0.88, note: '国民健康・栄養調査の男性平均身長・標準偏差から正規近似。' },
-  { id: 'over170', label: '身長170cm以上', ratio: 0.61, note: '男性20-40代の平均身長171cm台を基準に正規近似。' },
-  { id: 'over175', label: '身長175cm以上', ratio: 0.27, note: '男性身長分布の上位3割弱として正規近似。' },
-  { id: 'over180', label: '身長180cm以上', ratio: 0.06, note: '男性身長分布の上位数%として正規近似。' },
+export const heightOptions: Array<
+  RatioOption<HeightId> & {
+    shortLabel: string;
+    rangeStartLabel: string;
+    rangeEndLabel: string;
+  }
+> = [
+  {
+    id: 'under165',
+    label: '身長165cm未満',
+    shortLabel: '165cm未満',
+    rangeStartLabel: '165cm未満',
+    rangeEndLabel: '164cm以下',
+    ratio: 0.12,
+    note: '165cm以上の割合を88%と置いた正規近似からの差分。',
+  },
+  {
+    id: 'cm165To169',
+    label: '身長165-169cm',
+    shortLabel: '165-169cm',
+    rangeStartLabel: '165cm',
+    rangeEndLabel: '169cm',
+    ratio: 0.27,
+    note: '165cm以上と170cm以上の累積割合の差分として置く。',
+  },
+  {
+    id: 'cm170To174',
+    label: '身長170-174cm',
+    shortLabel: '170-174cm',
+    rangeStartLabel: '170cm',
+    rangeEndLabel: '174cm',
+    ratio: 0.34,
+    note: '170cm以上と175cm以上の累積割合の差分として置く。',
+  },
+  {
+    id: 'cm175To179',
+    label: '身長175-179cm',
+    shortLabel: '175-179cm',
+    rangeStartLabel: '175cm',
+    rangeEndLabel: '179cm',
+    ratio: 0.21,
+    note: '175cm以上と180cm以上の累積割合の差分として置く。',
+  },
+  {
+    id: 'cm180OrMore',
+    label: '身長180cm以上',
+    shortLabel: '180cm以上',
+    rangeStartLabel: '180cm',
+    rangeEndLabel: '180cm以上',
+    ratio: 0.06,
+    note: '男性身長分布の上位数%として正規近似。',
+  },
 ];

@@ -8,6 +8,9 @@ import {
   heightOptions,
   incomeOptions,
   locationOptions,
+  luxuryBrandInterestOptions,
+  movedToTokyoOptions,
+  nightWorkOptions,
   population,
   specValueOptions,
   targetLabels,
@@ -92,6 +95,44 @@ function getSelectedExperienceRange(input: FilterState) {
       options.length === 1
         ? first.note
         : '選択した経験人数レンジの仮定割合を合算する。自己申告バイアスが大きい条件。',
+  };
+}
+
+function getHeightOptionIndex(id: FilterState['male']['heightFrom']): number {
+  const index = heightOptions.findIndex((item) => item.id === id);
+  if (index < 0) {
+    throw new Error(`Unknown height option: ${id}`);
+  }
+  return index;
+}
+
+function getSelectedHeightRange(input: FilterState) {
+  const fromIndex = getHeightOptionIndex(input.male.heightFrom);
+  const toIndex = getHeightOptionIndex(input.male.heightTo);
+  const start = Math.min(fromIndex, toIndex);
+  const end = Math.max(fromIndex, toIndex);
+  const options = heightOptions.slice(start, end + 1);
+  const first = options[0];
+  const last = options[options.length - 1];
+
+  const label =
+    first.id === last.id
+      ? first.label
+      : first.id === 'under165' && last.id === 'cm180OrMore'
+        ? '身長 全レンジ'
+        : first.id === 'under165'
+          ? `身長${last.rangeEndLabel}まで`
+          : last.id === 'cm180OrMore'
+            ? `身長${first.rangeStartLabel}以上`
+            : `身長${first.rangeStartLabel}〜${last.rangeEndLabel}`;
+
+  return {
+    label,
+    ratio: options.reduce((sum, option) => sum + option.ratio, 0),
+    note:
+      options.length === 1
+        ? first.note
+        : '選択した身長レンジの仮定割合を合算する。男性身長分布の正規近似。',
   };
 }
 
@@ -189,6 +230,18 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
       const range = getSelectedExperienceRange(input);
       appendStep(steps, 'experience', range.label, range.ratio, range.note);
     }
+    if (input.enabled.nightWork) {
+      const option = findById(nightWorkOptions, input.female.nightWork);
+      appendStep(steps, 'nightWork', option.label, option.ratio, option.note);
+    }
+    if (input.enabled.luxuryBrandInterest) {
+      const option = findById(luxuryBrandInterestOptions, input.female.luxuryBrandInterest);
+      appendStep(steps, 'luxuryBrandInterest', option.label, option.ratio, option.note);
+    }
+    if (input.enabled.movedToTokyo) {
+      const option = findById(movedToTokyoOptions, input.female.movedToTokyo);
+      appendStep(steps, 'movedToTokyo', option.label, option.ratio, option.note);
+    }
   }
 
   if (targetGender === 'male') {
@@ -209,8 +262,8 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
       appendStep(steps, 'income', option.label, option.ratio, option.note);
     }
     if (input.enabled.height) {
-      const option = findById(heightOptions, input.male.height);
-      appendStep(steps, 'height', option.label, option.ratio, option.note);
+      const range = getSelectedHeightRange(input);
+      appendStep(steps, 'height', range.label, range.ratio, range.note);
     }
   }
 
@@ -266,6 +319,9 @@ export function getAverageScenario(current: FilterState): FilterState {
       specValue: true,
       cupSize: true,
       experience: true,
+      nightWork: true,
+      luxuryBrandInterest: true,
+      movedToTokyo: true,
       education: true,
       income: true,
       height: true,
@@ -281,13 +337,17 @@ export function getAverageScenario(current: FilterState): FilterState {
       cupSize: 'c',
       experienceFrom: 'threeToFive',
       experienceTo: 'threeToFive',
+      nightWork: 'no',
+      luxuryBrandInterest: 'no',
+      movedToTokyo: 'no',
     },
     male: {
       appearance: 'score50',
       specValue: 'over90',
       education: 'highSchoolOrMore',
       income: 'over400',
-      height: 'over170',
+      heightFrom: 'cm170To174',
+      heightTo: 'cm180OrMore',
     },
   };
 }
@@ -304,6 +364,9 @@ export function getExtremeMaleScenario(): FilterState {
       specValue: true,
       cupSize: true,
       experience: true,
+      nightWork: true,
+      luxuryBrandInterest: true,
+      movedToTokyo: true,
       education: true,
       income: true,
       height: true,
@@ -319,13 +382,17 @@ export function getExtremeMaleScenario(): FilterState {
       cupSize: 'e',
       experienceFrom: 'none',
       experienceTo: 'none',
+      nightWork: 'no',
+      luxuryBrandInterest: 'no',
+      movedToTokyo: 'no',
     },
     male: {
       appearance: 'score65',
       specValue: 'over105',
       education: 'universityOrMore',
       income: 'over800',
-      height: 'over175',
+      heightFrom: 'cm175To179',
+      heightTo: 'cm180OrMore',
     },
   };
 }
@@ -346,6 +413,9 @@ export function getExtremeFemaleScenario(): FilterState {
       cupSize: 'e',
       experienceFrom: 'none',
       experienceTo: 'none',
+      nightWork: 'no',
+      luxuryBrandInterest: 'no',
+      movedToTokyo: 'no',
     },
   };
 }

@@ -9,6 +9,9 @@ import {
   heightOptions,
   incomeOptions,
   locationOptions,
+  luxuryBrandInterestOptions,
+  movedToTokyoOptions,
+  nightWorkOptions,
   searchLabels,
   specValueOptions,
 } from '../data/assumptions';
@@ -22,6 +25,11 @@ function getAgeBucketIndex(ageBucketId: FilterState['common']['ageFrom']): numbe
 
 function getExperienceOptionIndex(experienceId: FilterState['female']['experienceFrom']): number {
   const index = experienceOptions.findIndex((item) => item.id === experienceId);
+  return index < 0 ? 0 : index;
+}
+
+function getHeightOptionIndex(heightId: FilterState['male']['heightFrom']): number {
+  const index = heightOptions.findIndex((item) => item.id === heightId);
   return index < 0 ? 0 : index;
 }
 
@@ -50,6 +58,8 @@ export function FilterPanel({
   const ageToIndex = getAgeBucketIndex(filters.common.ageTo);
   const experienceFromIndex = getExperienceOptionIndex(filters.female.experienceFrom);
   const experienceToIndex = getExperienceOptionIndex(filters.female.experienceTo);
+  const heightFromIndex = getHeightOptionIndex(filters.male.heightFrom);
+  const heightToIndex = getHeightOptionIndex(filters.male.heightTo);
 
   return (
     <section className="panel control-panel" aria-label="条件入力">
@@ -307,6 +317,51 @@ export function FilterPanel({
               <span className="range-hint">範囲を自動補正します</span>
             ) : null}
           </ConditionRow>
+          <ConditionRow
+            conditionId="nightWork"
+            enabled={filters.enabled.nightWork}
+            title="夜職経験"
+            description="自己申告前提のセンシティブ条件として扱う"
+            value={filters.female.nightWork}
+            options={nightWorkOptions}
+            onToggle={toggleCondition}
+            onChange={(nightWork) =>
+              setFilters((current) => ({
+                ...current,
+                female: { ...current.female, nightWork },
+              }))
+            }
+          />
+          <ConditionRow
+            conditionId="luxuryBrandInterest"
+            enabled={filters.enabled.luxuryBrandInterest}
+            title="ハイブラ興味"
+            description="ブランド志向の自己申告条件としてざっくり扱う"
+            value={filters.female.luxuryBrandInterest}
+            options={luxuryBrandInterestOptions}
+            onToggle={toggleCondition}
+            onChange={(luxuryBrandInterest) =>
+              setFilters((current) => ({
+                ...current,
+                female: { ...current.female, luxuryBrandInterest },
+              }))
+            }
+          />
+          <ConditionRow
+            conditionId="movedToTokyo"
+            enabled={filters.enabled.movedToTokyo}
+            title="上京経験"
+            description="東京圏への移住経験を仮定条件として扱う"
+            value={filters.female.movedToTokyo}
+            options={movedToTokyoOptions}
+            onToggle={toggleCondition}
+            onChange={(movedToTokyo) =>
+              setFilters((current) => ({
+                ...current,
+                female: { ...current.female, movedToTokyo },
+              }))
+            }
+          />
         </div>
       ) : (
         <div className="condition-group">
@@ -375,17 +430,69 @@ export function FilterPanel({
             conditionId="height"
             enabled={filters.enabled.height}
             title="身長"
-            description="身長分布から指定以上だけを残す"
-            value={filters.male.height}
-            options={heightOptions}
+            description="最小と最大の身長レンジではさんで割合を合算する"
             onToggle={toggleCondition}
-            onChange={(height) =>
-              setFilters((current) => ({
-                ...current,
-                male: { ...current.male, height },
-              }))
-            }
-          />
+          >
+            <div className="range-control">
+              <label>
+                <span>最小</span>
+                <select
+                  value={filters.male.heightFrom}
+                  disabled={!filters.enabled.height}
+                  onChange={(event) => {
+                    const heightFrom = event.target.value as FilterState['male']['heightFrom'];
+                    setFilters((current) => {
+                      const nextFromIndex = getHeightOptionIndex(heightFrom);
+                      const currentToIndex = getHeightOptionIndex(current.male.heightTo);
+                      return {
+                        ...current,
+                        male: {
+                          ...current.male,
+                          heightFrom,
+                          heightTo: currentToIndex < nextFromIndex ? heightFrom : current.male.heightTo,
+                        },
+                      };
+                    });
+                  }}
+                >
+                  {heightOptions.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.shortLabel}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>最大</span>
+                <select
+                  value={filters.male.heightTo}
+                  disabled={!filters.enabled.height}
+                  onChange={(event) => {
+                    const heightTo = event.target.value as FilterState['male']['heightTo'];
+                    setFilters((current) => {
+                      const currentFromIndex = getHeightOptionIndex(current.male.heightFrom);
+                      const nextToIndex = getHeightOptionIndex(heightTo);
+                      return {
+                        ...current,
+                        male: {
+                          ...current.male,
+                          heightFrom: nextToIndex < currentFromIndex ? heightTo : current.male.heightFrom,
+                          heightTo,
+                        },
+                      };
+                    });
+                  }}
+                >
+                  {heightOptions.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.shortLabel}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            {heightFromIndex > heightToIndex ? <span className="range-hint">範囲を自動補正します</span> : null}
+          </ConditionRow>
         </div>
       )}
     </section>

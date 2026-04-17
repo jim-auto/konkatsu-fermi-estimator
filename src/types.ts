@@ -6,7 +6,10 @@ export type FemaleConditionId =
   | 'appearance'
   | 'specValue'
   | 'cupSize'
-  | 'experience';
+  | 'experience'
+  | 'nightWork'
+  | 'luxuryBrandInterest'
+  | 'movedToTokyo';
 
 export type MaleConditionId = 'appearance' | 'specValue' | 'education' | 'income' | 'height';
 
@@ -38,7 +41,8 @@ export type EducationId =
   | 'graduateSchoolOrMore'
   | 'topUniversityOrMore';
 export type IncomeId = 'over400' | 'over600' | 'over800' | 'over1000' | 'over1200';
-export type HeightId = 'over165' | 'over170' | 'over175' | 'over180';
+export type HeightId = 'under165' | 'cm165To169' | 'cm170To174' | 'cm175To179' | 'cm180OrMore';
+export type BinaryChoiceId = 'no' | 'yes';
 
 export type EnabledConditions = Record<ConditionId, boolean>;
 
@@ -57,13 +61,17 @@ export interface FilterState {
     cupSize: CupSizeId;
     experienceFrom: ExperienceId;
     experienceTo: ExperienceId;
+    nightWork: BinaryChoiceId;
+    luxuryBrandInterest: BinaryChoiceId;
+    movedToTokyo: BinaryChoiceId;
   };
   male: {
     appearance: AppearanceId;
     specValue: SpecValueId;
     education: EducationId;
     income: IncomeId;
-    height: HeightId;
+    heightFrom: HeightId;
+    heightTo: HeightId;
   };
 }
 
