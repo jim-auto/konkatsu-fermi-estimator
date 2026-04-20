@@ -1,12 +1,15 @@
 import type {
   AgeBucketId,
   AppearanceId,
+  AthleticAbilityId,
   BinaryChoiceId,
   CupSizeId,
   EducationId,
   ExperienceId,
   HeightId,
+  HouseworkSkillId,
   IncomeId,
+  IqRangeId,
   LocationId,
   RatioOption,
   SpecValueId,
@@ -99,6 +102,120 @@ export const locationOptions: RatioOption<LocationId>[] = [
     label: '地方',
     ratio: 0.44,
     note: '都市部以外を44%と仮定。',
+  },
+];
+
+export const iqOptions: Array<
+  RatioOption<IqRangeId> & {
+    shortLabel: string;
+    rangeStartLabel: string;
+    rangeEndLabel: string;
+  }
+> = [
+  {
+    id: 'under85',
+    label: 'IQ 85未満',
+    shortLabel: '85未満',
+    rangeStartLabel: '85未満',
+    rangeEndLabel: '84以下',
+    ratio: 0.159,
+    note: 'IQを平均100・標準偏差15の正規分布として置いた近似。自己申告や検査差は未補正。',
+  },
+  {
+    id: 'iq85To99',
+    label: 'IQ 85-99',
+    shortLabel: '85-99',
+    rangeStartLabel: '85',
+    rangeEndLabel: '99',
+    ratio: 0.341,
+    note: 'IQを平均100・標準偏差15の正規分布として置いた近似。自己申告や検査差は未補正。',
+  },
+  {
+    id: 'iq100To114',
+    label: 'IQ 100-114',
+    shortLabel: '100-114',
+    rangeStartLabel: '100',
+    rangeEndLabel: '114',
+    ratio: 0.341,
+    note: 'IQを平均100・標準偏差15の正規分布として置いた近似。自己申告や検査差は未補正。',
+  },
+  {
+    id: 'iq115To129',
+    label: 'IQ 115-129',
+    shortLabel: '115-129',
+    rangeStartLabel: '115',
+    rangeEndLabel: '129',
+    ratio: 0.136,
+    note: 'IQを平均100・標準偏差15の正規分布として置いた近似。婚活条件としてはかなり粗い仮定。',
+  },
+  {
+    id: 'iq130OrMore',
+    label: 'IQ 130以上',
+    shortLabel: '130以上',
+    rangeStartLabel: '130',
+    rangeEndLabel: '130以上',
+    ratio: 0.023,
+    note: 'IQを平均100・標準偏差15の正規分布として置いた近似。上位約2%として扱う。',
+  },
+];
+
+export const houseworkSkillOptions: RatioOption<HouseworkSkillId>[] = [
+  {
+    id: 'basicOrMore',
+    label: '家事 最低限できる',
+    ratio: 0.8,
+    note: '料理・掃除・洗濯などの自己申告スキルをざっくり置いた仮定。',
+  },
+  {
+    id: 'averageOrMore',
+    label: '家事 普通以上',
+    ratio: 0.55,
+    note: '自己申告前提の家事スキル条件。生活経験や同居歴との相関は未補正。',
+  },
+  {
+    id: 'goodOrMore',
+    label: '家事 得意以上',
+    ratio: 0.28,
+    note: '家事が得意と言える層をエンタメ寄りに置いた仮定。',
+  },
+  {
+    id: 'veryGoodOrMore',
+    label: '家事 かなり得意',
+    ratio: 0.12,
+    note: '料理・掃除・洗濯を安定して回せる層として強めに絞る仮定。',
+  },
+  {
+    id: 'excellent',
+    label: '家事 全般かなり強い',
+    ratio: 0.06,
+    note: '家事全般を高水準でこなせる層としてかなり強く絞る仮定。',
+  },
+];
+
+export const athleticAbilityOptions: RatioOption<AthleticAbilityId>[] = [
+  {
+    id: 'athleticAverageOrMore',
+    label: '運動神経 普通以上',
+    ratio: 0.55,
+    note: '運動神経の自己申告をざっくり段階化した仮定。年齢や運動習慣との相関は未補正。',
+  },
+  {
+    id: 'athleticGoodOrMore',
+    label: '運動神経 得意以上',
+    ratio: 0.3,
+    note: 'スポーツや身体操作が得意と言える層をエンタメ寄りに置いた仮定。',
+  },
+  {
+    id: 'athleticVeryGoodOrMore',
+    label: '運動神経 かなり得意',
+    ratio: 0.12,
+    note: '日常的な運動経験や競技経験がある層として強めに絞る仮定。',
+  },
+  {
+    id: 'athleticExcellent',
+    label: '運動神経 かなり強い',
+    ratio: 0.05,
+    note: '運動能力をかなり高く自己評価できる層として強く絞る仮定。',
   },
 ];
 

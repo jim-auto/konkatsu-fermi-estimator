@@ -1,12 +1,15 @@
 import {
   ageBuckets,
   appearanceOptions,
+  athleticAbilityOptions,
   cupSizeOptions,
   educationOptions,
   experienceOptions,
   faceScoreOptions,
   heightOptions,
+  houseworkSkillOptions,
   incomeOptions,
+  iqOptions,
   locationOptions,
   luxuryBrandInterestOptions,
   movedToTokyoOptions,
@@ -95,6 +98,44 @@ function getSelectedExperienceRange(input: FilterState) {
       options.length === 1
         ? first.note
         : '選択した経験人数レンジの仮定割合を合算する。自己申告バイアスが大きい条件。',
+  };
+}
+
+function getIqOptionIndex(id: FilterState['common']['iqFrom']): number {
+  const index = iqOptions.findIndex((item) => item.id === id);
+  if (index < 0) {
+    throw new Error(`Unknown IQ option: ${id}`);
+  }
+  return index;
+}
+
+function getSelectedIqRange(input: FilterState) {
+  const fromIndex = getIqOptionIndex(input.common.iqFrom);
+  const toIndex = getIqOptionIndex(input.common.iqTo);
+  const start = Math.min(fromIndex, toIndex);
+  const end = Math.max(fromIndex, toIndex);
+  const options = iqOptions.slice(start, end + 1);
+  const first = options[0];
+  const last = options[options.length - 1];
+
+  const label =
+    first.id === last.id
+      ? first.label
+      : first.id === 'under85' && last.id === 'iq130OrMore'
+        ? 'IQ 全レンジ'
+        : first.id === 'under85'
+          ? `IQ ${last.rangeEndLabel}まで`
+          : last.id === 'iq130OrMore'
+            ? `IQ ${first.rangeStartLabel}以上`
+            : `IQ ${first.rangeStartLabel}〜${last.rangeEndLabel}`;
+
+  return {
+    label,
+    ratio: options.reduce((sum, option) => sum + option.ratio, 0),
+    note:
+      options.length === 1
+        ? first.note
+        : '選択したIQレンジの仮定割合を合算する。平均100・標準偏差15の正規分布近似。',
   };
 }
 
@@ -213,6 +254,21 @@ export function estimatePopulation(input: FilterState, targetGender = input.targ
     appendStep(steps, 'location', option.label, option.ratio, option.note);
   }
 
+  if (input.enabled.iq) {
+    const range = getSelectedIqRange(input);
+    appendStep(steps, 'iq', range.label, range.ratio, range.note);
+  }
+
+  if (input.enabled.houseworkSkill) {
+    const option = findById(houseworkSkillOptions, input.common.houseworkSkill);
+    appendStep(steps, 'houseworkSkill', option.label, option.ratio, option.note);
+  }
+
+  if (input.enabled.athleticAbility) {
+    const option = findById(athleticAbilityOptions, input.common.athleticAbility);
+    appendStep(steps, 'athleticAbility', option.label, option.ratio, option.note);
+  }
+
   if (targetGender === 'female') {
     if (input.enabled.appearance) {
       const option = findById(appearanceOptions, input.female.appearance);
@@ -325,11 +381,18 @@ export function getAverageScenario(current: FilterState): FilterState {
       education: true,
       income: true,
       height: true,
+      iq: true,
+      houseworkSkill: true,
+      athleticAbility: true,
     },
     common: {
       ageFrom: 'lateTeens',
       ageTo: 'early20s',
       location: 'urban',
+      iqFrom: 'iq85To99',
+      iqTo: 'iq100To114',
+      houseworkSkill: 'averageOrMore',
+      athleticAbility: 'athleticAverageOrMore',
     },
     female: {
       appearance: 'score50',
@@ -370,11 +433,18 @@ export function getExtremeMaleScenario(): FilterState {
       education: true,
       income: true,
       height: true,
+      iq: true,
+      houseworkSkill: true,
+      athleticAbility: true,
     },
     common: {
       ageFrom: 'lateTeens',
       ageTo: 'early20s',
       location: 'urban',
+      iqFrom: 'iq115To129',
+      iqTo: 'iq130OrMore',
+      houseworkSkill: 'veryGoodOrMore',
+      athleticAbility: 'athleticVeryGoodOrMore',
     },
     female: {
       appearance: 'score65',
@@ -406,6 +476,10 @@ export function getExtremeFemaleScenario(): FilterState {
       ageFrom: 'lateTeens',
       ageTo: 'early20s',
       location: 'urban',
+      iqFrom: 'iq115To129',
+      iqTo: 'iq130OrMore',
+      houseworkSkill: 'veryGoodOrMore',
+      athleticAbility: 'athleticVeryGoodOrMore',
     },
     female: {
       appearance: 'score65',

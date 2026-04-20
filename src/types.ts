@@ -1,6 +1,6 @@
 export type TargetGender = 'female' | 'male';
 
-export type CommonConditionId = 'age' | 'location' | 'unmarried';
+export type CommonConditionId = 'age' | 'location' | 'unmarried' | 'iq' | 'houseworkSkill' | 'athleticAbility';
 
 export type FemaleConditionId =
   | 'appearance'
@@ -24,6 +24,13 @@ export type AgeBucketId =
   | 'early40s'
   | 'late40s';
 export type LocationId = 'urban' | 'regional';
+export type IqRangeId = 'under85' | 'iq85To99' | 'iq100To114' | 'iq115To129' | 'iq130OrMore';
+export type HouseworkSkillId = 'basicOrMore' | 'averageOrMore' | 'goodOrMore' | 'veryGoodOrMore' | 'excellent';
+export type AthleticAbilityId =
+  | 'athleticAverageOrMore'
+  | 'athleticGoodOrMore'
+  | 'athleticVeryGoodOrMore'
+  | 'athleticExcellent';
 export type AppearanceId = 'score50' | 'score55' | 'score60' | 'score65' | 'score70';
 export type SpecValueId = 'over90' | 'over100' | 'over105' | 'over110' | 'over115' | 'over120';
 export type CupSizeId = 'aToB' | 'c' | 'd' | 'e' | 'f' | 'g' | 'hOrMore';
@@ -54,6 +61,10 @@ export interface FilterState {
     ageFrom: AgeBucketId;
     ageTo: AgeBucketId;
     location: LocationId;
+    iqFrom: IqRangeId;
+    iqTo: IqRangeId;
+    houseworkSkill: HouseworkSkillId;
+    athleticAbility: AthleticAbilityId;
   };
   female: {
     appearance: AppearanceId;

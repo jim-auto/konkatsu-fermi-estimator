@@ -2,12 +2,15 @@ import type { Dispatch, SetStateAction } from 'react';
 import {
   ageBuckets,
   appearanceOptions,
+  athleticAbilityOptions,
   cupSizeOptions,
   educationOptions,
   experienceOptions,
   faceScoreOptions,
   heightOptions,
+  houseworkSkillOptions,
   incomeOptions,
+  iqOptions,
   locationOptions,
   luxuryBrandInterestOptions,
   movedToTokyoOptions,
@@ -25,6 +28,11 @@ function getAgeBucketIndex(ageBucketId: FilterState['common']['ageFrom']): numbe
 
 function getExperienceOptionIndex(experienceId: FilterState['female']['experienceFrom']): number {
   const index = experienceOptions.findIndex((item) => item.id === experienceId);
+  return index < 0 ? 0 : index;
+}
+
+function getIqOptionIndex(iqRangeId: FilterState['common']['iqFrom']): number {
+  const index = iqOptions.findIndex((item) => item.id === iqRangeId);
   return index < 0 ? 0 : index;
 }
 
@@ -58,6 +66,8 @@ export function FilterPanel({
   const ageToIndex = getAgeBucketIndex(filters.common.ageTo);
   const experienceFromIndex = getExperienceOptionIndex(filters.female.experienceFrom);
   const experienceToIndex = getExperienceOptionIndex(filters.female.experienceTo);
+  const iqFromIndex = getIqOptionIndex(filters.common.iqFrom);
+  const iqToIndex = getIqOptionIndex(filters.common.iqTo);
   const heightFromIndex = getHeightOptionIndex(filters.male.heightFrom);
   const heightToIndex = getHeightOptionIndex(filters.male.heightTo);
 
@@ -193,6 +203,103 @@ export function FilterPanel({
             setFilters((current) => ({
               ...current,
               common: { ...current.common, location },
+            }))
+          }
+        />
+        <ConditionRow
+          conditionId="iq"
+          enabled={filters.enabled.iq}
+          title="IQレンジ"
+          description="最小と最大のIQ帯ではさんで割合を合算する"
+          onToggle={toggleCondition}
+        >
+          <div className="range-control">
+            <label>
+              <span>最小</span>
+              <select
+                value={filters.common.iqFrom}
+                disabled={!filters.enabled.iq}
+                onChange={(event) => {
+                  const iqFrom = event.target.value as FilterState['common']['iqFrom'];
+                  setFilters((current) => {
+                    const nextFromIndex = getIqOptionIndex(iqFrom);
+                    const currentToIndex = getIqOptionIndex(current.common.iqTo);
+                    return {
+                      ...current,
+                      common: {
+                        ...current.common,
+                        iqFrom,
+                        iqTo: currentToIndex < nextFromIndex ? iqFrom : current.common.iqTo,
+                      },
+                    };
+                  });
+                }}
+              >
+                {iqOptions.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.shortLabel}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>最大</span>
+              <select
+                value={filters.common.iqTo}
+                disabled={!filters.enabled.iq}
+                onChange={(event) => {
+                  const iqTo = event.target.value as FilterState['common']['iqTo'];
+                  setFilters((current) => {
+                    const currentFromIndex = getIqOptionIndex(current.common.iqFrom);
+                    const nextToIndex = getIqOptionIndex(iqTo);
+                    return {
+                      ...current,
+                      common: {
+                        ...current.common,
+                        iqFrom: nextToIndex < currentFromIndex ? iqTo : current.common.iqFrom,
+                        iqTo,
+                      },
+                    };
+                  });
+                }}
+              >
+                {iqOptions.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.shortLabel}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          {iqFromIndex > iqToIndex ? <span className="range-hint">範囲を自動補正します</span> : null}
+        </ConditionRow>
+        <ConditionRow
+          conditionId="houseworkSkill"
+          enabled={filters.enabled.houseworkSkill}
+          title="家事スキル"
+          description="料理・掃除・洗濯などの自己申告スキルで絞る"
+          value={filters.common.houseworkSkill}
+          options={houseworkSkillOptions}
+          onToggle={toggleCondition}
+          onChange={(houseworkSkill) =>
+            setFilters((current) => ({
+              ...current,
+              common: { ...current.common, houseworkSkill },
+            }))
+          }
+        />
+        <ConditionRow
+          conditionId="athleticAbility"
+          enabled={filters.enabled.athleticAbility}
+          title="運動神経"
+          description="身体操作やスポーツ適性の自己申告スキルで絞る"
+          value={filters.common.athleticAbility}
+          options={athleticAbilityOptions}
+          onToggle={toggleCondition}
+          onChange={(athleticAbility) =>
+            setFilters((current) => ({
+              ...current,
+              common: { ...current.common, athleticAbility },
             }))
           }
         />
